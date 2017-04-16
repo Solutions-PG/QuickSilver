@@ -7,12 +7,12 @@ namespace SolutionsPG.QuickSilver.Commons.Extensions
         #region " Public methods "
 
         /// <summary>
-        /// Take an object and transform it into something else if the condition is met.
+        /// Take an object and transform it into something else if the condition is met. Useful in fluent scenario.
         /// </summary>
         /// <typeparam name="T">Type of the object</typeparam>
         /// <typeparam name="TResult">Type of the returned objet</typeparam>
         /// <param name="obj">Object to transform</param>
-        /// <param name="condition">Delegate returning if the a condition has been met</param>
+        /// <param name="condition">Delegate returning if a condition has been met</param>
         /// <param name="action">Action transforming the object</param>
         /// <returns>The object transformed if the condition is met. Else Default(TResult)</returns>
         public static TResult TransformIf<T, TResult>(this T obj, Func<T, bool> condition, Func<T, TResult> action)
@@ -23,6 +23,22 @@ namespace SolutionsPG.QuickSilver.Commons.Extensions
                 throw new ArgumentNullException(nameof(action));
 
             return obj.TransformIf_(condition(obj), action);
+        }
+
+        /// <summary>
+        /// Take an object and transform it into something else if the caller is not null.
+        /// </summary>
+        /// <typeparam name="T">Type of the object</typeparam>
+        /// <typeparam name="TResult">Type of the returned objet</typeparam>
+        /// <param name="obj">Object to transform</param>
+        /// <param name="action">Action transforming the object</param>
+        /// <returns>The object transformed if the caller is not null. Else Default(TResult)</returns>
+        public static TResult TransformIfNotNull<T, TResult>(this T obj, Func<T, TResult> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            return obj.TransformIf_(obj != null, action);
         }
 
         /// <summary>

@@ -27,6 +27,22 @@ namespace SolutionsPG.QuickSilver.Commons.Extensions
         }
 
         /// <summary>
+        /// Execute an action if the caller is not null and return the caller.
+        /// </summary>
+        /// <typeparam name="T">Type of the caller</typeparam>
+        /// <param name="obj">The caller</param>
+        /// <param name="action">Action to be executed</param>
+        /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
+        /// <returns>The caller</returns>
+        public static T DoIfNotNull<T>(this T obj, Action action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            return obj.DoIf_(obj != null, action);
+        }
+
+        /// <summary>
         /// Execute an action if the condition is true and return the caller.
         /// </summary>
         /// <typeparam name="T">Type of the caller</typeparam>

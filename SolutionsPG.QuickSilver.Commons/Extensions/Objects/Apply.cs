@@ -7,7 +7,8 @@ namespace SolutionsPG.QuickSilver.Commons.Extensions
         #region " Public methods "
 
         /// <summary>
-        /// Execute an action on the caller or by using it then return the caller.
+        /// If the condition is true an action using the caller is executed, then the caller is returned.
+        /// Useful in fluent scenario.
         /// </summary>
         /// <typeparam name="T">Type of the caller</typeparam>
         /// <param name="obj">The caller</param>
@@ -27,7 +28,23 @@ namespace SolutionsPG.QuickSilver.Commons.Extensions
         }
 
         /// <summary>
-        /// Execute an action on the caller or by using it then return the caller.
+        /// If the caller is not null an action using the caller is executed, then the caller is returned.
+        /// </summary>
+        /// <typeparam name="T">Type of the caller</typeparam>
+        /// <param name="obj">The caller</param>
+        /// <param name="action">Action to be executed</param>
+        /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
+        /// <returns>The caller</returns>
+        public static T ApplyIfNotNull<T>(this T obj, Action<T> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            return obj.ApplyIf_(obj != null, action);
+        }
+
+        /// <summary>
+        /// If the condition is true an action using the caller is executed, then the caller is returned.
         /// </summary>
         /// <typeparam name="T">Type of the caller</typeparam>
         /// <param name="obj">The caller</param>
