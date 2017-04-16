@@ -54,16 +54,16 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Arrange
             object obj = null;
             bool actionCalled = false;
-            object objReceived = new object();
-            Action<object> action = new Action<object>(o => { actionCalled = true; objReceived = o; });
+            object objReceivedAction = new object();
+            Action<object> action = new Action<object>(o => { actionCalled = true; objReceivedAction = o; });
 
             //Act       
             var result = obj.Apply(action);
 
             //Assert
-            Assert.AreEqual(obj, result);
             Assert.IsTrue(actionCalled);
-            Assert.AreEqual(obj, objReceived);
+            Assert.AreEqual(obj, objReceivedAction);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -72,21 +72,21 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Arrange
             object obj = new object();
             bool actionCalled = false;
-            object objReceived = new object();
-            Action<object> action = new Action<object>(o => { actionCalled = true; objReceived = o; });
+            object objReceivedAction = new object();
+            Action<object> action = new Action<object>(o => { actionCalled = true; objReceivedAction = o; });
 
             //Act       
             var result = obj.Apply(action);
 
             //Assert
-            Assert.AreEqual(obj, result);
             Assert.IsTrue(actionCalled);
-            Assert.AreEqual(obj, objReceived);
+            Assert.AreEqual(obj, objReceivedAction);
+            Assert.AreEqual(obj, result);
         }
 
         #endregion //Apply
 
-        #region " ApplyIf<T>(this T obj, bool condition, Action<object> action) "
+        #region " ApplyIf<T>(this T obj, bool condition, Action<T> action) "
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
         public void ObjectExtensions_ApplyIf_ObjectNull_ConditionTrue_ActionNull_ThrowArgumentNullException()
@@ -147,16 +147,16 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             object obj = null;
             bool condition = true;
             bool actionCalled = false;
-            object objReceived = new object();
-            Action<object> action = new Action<object>(o => { actionCalled = true; objReceived = o; });
+            object objReceivedAction = new object();
+            Action<object> action = new Action<object>(o => { actionCalled = true; objReceivedAction = o; });
 
             //Act       
             var result = obj.ApplyIf(condition, action);
 
             //Assert
-            Assert.AreEqual(obj, result);
             Assert.IsTrue(actionCalled);
-            Assert.AreEqual(obj, objReceived);
+            Assert.AreEqual(obj, objReceivedAction);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -166,16 +166,16 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             object obj = new object();
             bool condition = true;
             bool actionCalled = false;
-            object objReceived = new object();
-            Action<object> action = new Action<object>(o => { actionCalled = true; objReceived = o; });
+            object objReceivedAction = new object();
+            Action<object> action = new Action<object>(o => { actionCalled = true; objReceivedAction = o; });
 
             //Act       
             var result = obj.ApplyIf(condition, action);
 
             //Assert
-            Assert.AreEqual(obj, result);
             Assert.IsTrue(actionCalled);
-            Assert.AreEqual(obj, objReceived);
+            Assert.AreEqual(obj, objReceivedAction);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -212,9 +212,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             Assert.IsFalse(actionCalled);
         }
 
-        #endregion //ApplyIf<T>(this T obj, bool condition, Action<object> action)
+        #endregion //ApplyIf<T>(this T obj, bool condition, Action<T> action)
 
-        #region " ApplyIf<T>(this T obj, Func<T, bool> condition, Action<object> action) "
+        #region " ApplyIf<T>(this T obj, Func<T, bool> condition, Action<T> action) "
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
         public void ObjectExtensions_ApplyIfFunc_ObjectNull_ConditionNull_ActionNull_ThrowArgumentNullException()
@@ -316,8 +316,8 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             bool conditionValue = true;
             Func<object, bool> condition = o => { conditionCalled = true; objReceivedCondition = o; return conditionValue; };
             bool actionCalled = false;
-            object objReceived = new object();
-            Action<object> action = new Action<object>(o => { actionCalled = true; objReceived = o; });
+            object objReceivedAction = new object();
+            Action<object> action = new Action<object>(o => { actionCalled = true; objReceivedAction = o; });
 
             //Act       
             var result = obj.ApplyIf(condition, action);
@@ -325,9 +325,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Assert
             Assert.IsTrue(conditionCalled);
             Assert.AreEqual(obj, objReceivedCondition);
-            Assert.AreEqual(obj, result);
             Assert.IsTrue(actionCalled);
-            Assert.AreEqual(obj, objReceived);
+            Assert.AreEqual(obj, objReceivedAction);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -340,8 +340,8 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             bool conditionValue = true;
             Func<object, bool> condition = o => { conditionCalled = true; objReceivedCondition = o; return conditionValue; };
             bool actionCalled = false;
-            object objReceived = new object();
-            Action<object> action = new Action<object>(o => { actionCalled = true; objReceived = o; });
+            object objReceivedAction = new object();
+            Action<object> action = new Action<object>(o => { actionCalled = true; objReceivedAction = o; });
 
             //Act       
             var result = obj.ApplyIf(condition, action);
@@ -349,9 +349,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Assert
             Assert.IsTrue(conditionCalled);
             Assert.AreEqual(obj, objReceivedCondition);
-            Assert.AreEqual(obj, result);
             Assert.IsTrue(actionCalled);
-            Assert.AreEqual(obj, objReceived);
+            Assert.AreEqual(obj, objReceivedAction);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -372,8 +372,8 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Assert
             Assert.IsTrue(conditionCalled);
             Assert.AreEqual(obj, objReceivedCondition);
-            Assert.AreEqual(obj, result);
             Assert.IsFalse(actionCalled);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -394,13 +394,13 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Assert
             Assert.IsTrue(conditionCalled);
             Assert.AreEqual(obj, objReceivedCondition);
-            Assert.AreEqual(obj, result);
             Assert.IsFalse(actionCalled);
+            Assert.AreEqual(obj, result);
         }
 
-        #endregion //ApplyIf<T>(this T obj, Func<T, bool> condition, Action<object> action)
+        #endregion //ApplyIf<T>(this T obj, Func<T, bool> condition, Action<T> action)
 
-        #region " ApplyIfNotNull<T>(this T obj, Action<object> action) "
+        #region " ApplyIfNotNull<T>(this T obj, Action<T> action) "
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
         public void ObjectExtensions_ApplyIfNotNull_ObjectNull_ActionNull_ThrowArgumentNullException()
@@ -448,18 +448,18 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Arrange
             object obj = new object();
             bool actionCalled = false;
-            object objReceived = new object();
-            Action<object> action = new Action<object>(o => { actionCalled = true; objReceived = o; });
+            object objReceivedAction = new object();
+            Action<object> action = new Action<object>(o => { actionCalled = true; objReceivedAction = o; });
 
             //Act       
             var result = obj.ApplyIfNotNull(action);
 
             //Assert
-            Assert.AreEqual(obj, result);
             Assert.IsTrue(actionCalled);
-            Assert.AreEqual(obj, objReceived);
+            Assert.AreEqual(obj, objReceivedAction);
+            Assert.AreEqual(obj, result);
         }
 
-        #endregion //ApplyIfNotNull<T>(this T obj, Action<object> action)
+        #endregion //ApplyIfNotNull<T>(this T obj, Action<T> action)
     }
 }

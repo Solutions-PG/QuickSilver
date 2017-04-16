@@ -213,7 +213,6 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
         {
             //Arrange
             object obj = null;
-            object objReceived = new object();
             Func<object, bool> condition = null;
             Action action = null;
 
@@ -305,9 +304,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Arrange
             object obj = null;
             bool conditionCalled = false;
-            object objReceived = new object();
+            object objReceivedCondition = new object();
             bool conditionValue = true;
-            Func<object, bool> condition = o => { conditionCalled = true; objReceived = o; return conditionValue; };
+            Func<object, bool> condition = o => { conditionCalled = true; objReceivedCondition = o; return conditionValue; };
             bool actionCalled = false;
             Action action = new Action(() => { actionCalled = true; });
 
@@ -316,9 +315,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
 
             //Assert
             Assert.IsTrue(conditionCalled);
-            Assert.AreEqual(obj, objReceived);
-            Assert.AreEqual(obj, result);
+            Assert.AreEqual(obj, objReceivedCondition);
             Assert.IsTrue(actionCalled);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -327,9 +326,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Arrange
             object obj = new object();
             bool conditionCalled = false;
-            object objReceived = new object();
+            object objReceivedCondition = new object();
             bool conditionValue = true;
-            Func<object, bool> condition = o => { conditionCalled = true; objReceived = o; return conditionValue; };
+            Func<object, bool> condition = o => { conditionCalled = true; objReceivedCondition = o; return conditionValue; };
             bool actionCalled = false;
             Action action = new Action(() => { actionCalled = true; });
 
@@ -338,9 +337,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
 
             //Assert
             Assert.IsTrue(conditionCalled);
-            Assert.AreEqual(obj, objReceived);
-            Assert.AreEqual(obj, result);
+            Assert.AreEqual(obj, objReceivedCondition);
             Assert.IsTrue(actionCalled);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -349,9 +348,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Arrange
             object obj = null;
             bool conditionCalled = false;
-            object objReceived = new object();
+            object objReceivedCondition = new object();
             bool conditionValue = false;
-            Func<object, bool> condition = o => { conditionCalled = true; objReceived = o; return conditionValue; };
+            Func<object, bool> condition = o => { conditionCalled = true; objReceivedCondition = o; return conditionValue; };
             bool actionCalled = false;
             Action action = new Action(() => { actionCalled = true; });
 
@@ -360,9 +359,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
 
             //Assert
             Assert.IsTrue(conditionCalled);
-            Assert.AreEqual(obj, objReceived);
-            Assert.AreEqual(obj, result);
+            Assert.AreEqual(obj, objReceivedCondition);
             Assert.IsFalse(actionCalled);
+            Assert.AreEqual(obj, result);
         }
 
         [TestMethod, TestCategory("Commons.Extensions"), TestCategory("Commons.Extensions.Objects")]
@@ -371,9 +370,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
             //Arrange
             object obj = new object();
             bool conditionCalled = false;
-            object objReceived = new object();
+            object objReceivedCondition = new object();
             bool conditionValue = false;
-            Func<object, bool> condition = o => { conditionCalled = true; objReceived = o; return conditionValue; };
+            Func<object, bool> condition = o => { conditionCalled = true; objReceivedCondition = o; return conditionValue; };
             bool actionCalled = false;
             Action action = new Action(() => { actionCalled = true; });
 
@@ -382,9 +381,9 @@ namespace SolutionsPG.QuickSilver.Commons.Tests.Extensions
 
             //Assert
             Assert.IsTrue(conditionCalled);
-            Assert.AreEqual(obj, objReceived);
-            Assert.AreEqual(obj, result);
+            Assert.AreEqual(obj, objReceivedCondition);
             Assert.IsFalse(actionCalled);
+            Assert.AreEqual(obj, result);
         }
 
         #endregion //DoIf<T>(this T obj, Func<T, bool> condition, Action action)
