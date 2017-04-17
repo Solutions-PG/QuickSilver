@@ -43,15 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Disposables\DisposableUnmanaged.cs" />
+    <Compile Include="Disposables\ResourceUnmanaged.cs" />
+    <Compile Include="Disposables\Resource.cs" />
     <Compile Include="Extensions\Objects\Apply.cs" />
     <Compile Include="Extensions\Objects\Do.cs" />
     <Compile Include="Extensions\Objects\Throw.cs" />
     <Compile Include="Extensions\Objects\Transform.cs" />
+    <Compile Include="Disposables\Disposable.cs" />
+    <Compile Include="Helpers\DisposableUnmanagedHelper.cs" />
+    <Compile Include="Helpers\DisposableHelper.cs" />
+    <Compile Include="Helpers\ResourceUnmanagedHelper.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
+    <Compile Include="Helpers\ComparerHelper.cs" />
+    <Compile Include="Helpers\EqualityComparerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
