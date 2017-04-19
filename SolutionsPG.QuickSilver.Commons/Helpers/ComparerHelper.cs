@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SolutionsPG.QuickSilver.Commons.Helpers
 {
-    public class ComparerHelper<T> : Comparer<T>
+    public sealed class ComparerHelper<T> : Comparer<T>
     {
         #region " Variables "
 
@@ -26,7 +26,7 @@ namespace SolutionsPG.QuickSilver.Commons.Helpers
         /// </param>
         public ComparerHelper(Comparison<T> compare) : base()
         {
-            this._compareFunc = compare;
+            _compareFunc = compare;
         }
 
         #endregion //Constructors
@@ -40,10 +40,7 @@ namespace SolutionsPG.QuickSilver.Commons.Helpers
         /// <param name="first">The first object to compare.</param>
         /// <param name="second">The second object to compare.</param>
         /// <returns></returns>
-        public override int Compare(T first, T second)
-        {
-            return this._compareFunc?.Invoke(first, second) ?? throw new NotImplementedException();
-        }
+        public override int Compare(T first, T second) => _compareFunc?.Invoke(first, second) ?? throw new NotImplementedException();
 
         /// <summary>
         /// Act as a convenient converter when a function need a Comparer{T} and doesn't offer the possibility to

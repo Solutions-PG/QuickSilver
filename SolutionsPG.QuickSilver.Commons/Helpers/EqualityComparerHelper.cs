@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SolutionsPG.QuickSilver.Commons.Helpers
 {
-    public class EqualityComparerHelper<T> : EqualityComparer<T>
+    public sealed class EqualityComparerHelper<T> : EqualityComparer<T>
     {
         #region " Variables "
 
@@ -46,10 +46,7 @@ namespace SolutionsPG.QuickSilver.Commons.Helpers
         /// <param name="first">The first object to compare.</param>
         /// <param name="second">The second object to compare.</param>
         /// <returns>True if the specified objects are equal; Otherwise, false.</returns>
-        public override bool Equals(T first, T second)
-        {
-            return this._equalsFunc?.Invoke(first, second) ?? false;
-        }
+        public override bool Equals(T first, T second) => _equalsFunc?.Invoke(first, second) ?? false;
 
         /// <summary>
         /// Serves as a hash function for the specified object for hashing algorithms and data structures,
@@ -57,10 +54,7 @@ namespace SolutionsPG.QuickSilver.Commons.Helpers
         /// </summary>
         /// <param name="obj">The object for which to get a hash code.</param>
         /// <returns>A hash code for the specified object.</returns>
-        public override int GetHashCode(T obj)
-        {
-            return this._getHashCodeFunc?.Invoke(obj) ?? 1;
-        }
+        public override int GetHashCode(T obj) => _getHashCodeFunc?.Invoke(obj) ?? 1;
 
         #endregion //Public methods
     }

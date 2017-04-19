@@ -29,7 +29,7 @@ namespace SolutionsPG.QuickSilver.Commons.Disposables
         {
             if (!_disposedValue)
             {
-                DisposeImpl();
+                this.DisposeImpl();
                 _disposedValue = true;
             }
         }

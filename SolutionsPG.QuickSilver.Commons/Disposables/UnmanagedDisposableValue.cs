@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace SolutionsPG.QuickSilver.Commons.Disposables
 {
 
-    public abstract class ResourceUnmanaged<T> : IDisposable
+    public abstract class UnmanagedDisposableValue<T> : IDisposable
     {
         #region " Variables "
 
@@ -16,9 +16,11 @@ namespace SolutionsPG.QuickSilver.Commons.Disposables
 
         #region " Constructors "
 
-        protected ResourceUnmanaged(T value)
+        protected UnmanagedDisposableValue(T value)
         {
-            _disposableHelper = new DisposableUnmanagedHelper(this.Dispose_);
+            _disposableHelper = new UnmanagedDisposableHelper(Dispose_);
+
+            void Dispose_(bool diposing) => this.DisposeImpl(diposing, this.Value);
         }
 
         #endregion //Constructors
@@ -37,11 +39,5 @@ namespace SolutionsPG.QuickSilver.Commons.Disposables
         protected abstract void DisposeImpl(bool diposing, T value);
 
         #endregion //Protected methods
-
-        #region " Private methods "
-
-        private void Dispose_(bool diposing) => DisposeImpl(diposing, this.Value);
-
-        #endregion //Private methods
     }
 }

@@ -43,18 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Disposables\DisposableUnmanaged.cs" />
-    <Compile Include="Disposables\ResourceUnmanaged.cs" />
-    <Compile Include="Disposables\Resource.cs" />
+    <Compile Include="Disposables\UnmanagedDisposable.cs" />
+    <Compile Include="Disposables\TryLock.cs" />
+    <Compile Include="Interfaces\Disposables\IDisposableValueGeneric.cs" />
+    <Compile Include="Interfaces\Disposables\IDisposableValue.cs" />
+    <Compile Include="Disposables\ResourceManager.cs" />
+    <Compile Include="Disposables\UnmanagedDisposableValue.cs" />
+    <Compile Include="Disposables\DisposableValue.cs" />
+    <Compile Include="Helpers\ValueTypes\DisposableHelper.cs" />
+    <Compile Include="Helpers\ValueTypes\DisposableValueHelper.cs" />
     <Compile Include="Extensions\Objects\Apply.cs" />
     <Compile Include="Extensions\Objects\Do.cs" />
     <Compile Include="Extensions\Objects\Throw.cs" />
     <Compile Include="Extensions\Objects\Transform.cs" />
     <Compile Include="Disposables\Disposable.cs" />
-    <Compile Include="Helpers\DisposableUnmanagedHelper.cs" />
+    <Compile Include="Helpers\UnmanagedDisposableHelper.cs" />
     <Compile Include="Helpers\DisposableHelper.cs" />
-    <Compile Include="Helpers\ResourceUnmanagedHelper.cs" />
-    <Compile Include="Helpers\ResourceHelper.cs" />
+    <Compile Include="Helpers\DisposableValueHelper.cs" />
+    <Compile Include="Helpers\UnmanagedDisposableValueHelper.cs" />
+    <Compile Include="Helpers\ResourceManagerHelper.cs" />
     <Compile Include="Helpers\ComparerHelper.cs" />
     <Compile Include="Helpers\EqualityComparerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

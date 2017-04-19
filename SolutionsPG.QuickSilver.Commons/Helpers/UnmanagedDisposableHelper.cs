@@ -3,7 +3,7 @@ using SolutionsPG.QuickSilver.Commons.Disposables;
 
 namespace SolutionsPG.QuickSilver.Commons.Helpers
 {
-    public class DisposableUnmanagedHelper : DisposableUnmanaged
+    public sealed class UnmanagedDisposableHelper : UnmanagedDisposable
     {
         #region " Variables "
 
@@ -13,9 +13,9 @@ namespace SolutionsPG.QuickSilver.Commons.Helpers
 
         #region " Constructors "
         
-        public DisposableUnmanagedHelper(Action<bool> dispose) : base()
+        public UnmanagedDisposableHelper(Action<bool> dispose) : base()
         {
-            this._disposeFunc = dispose;
+            _disposeFunc = dispose;
         }
 
         #endregion //Constructors
@@ -24,7 +24,7 @@ namespace SolutionsPG.QuickSilver.Commons.Helpers
 
         protected override void DisposeImpl(bool disposing)
         {
-            var disposeFunc = this._disposeFunc;
+            var disposeFunc = _disposeFunc;
             if (disposeFunc == null)
                 throw new NotImplementedException();
             disposeFunc(disposing);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SolutionsPG.QuickSilver.Commons.Disposables
 {
-    public abstract class DisposableUnmanaged : IDisposable
+    public abstract class UnmanagedDisposable : IDisposable
     {
         #region " Variables "
 
@@ -16,7 +16,7 @@ namespace SolutionsPG.QuickSilver.Commons.Disposables
 
         #region " Constructors "
 
-        protected DisposableUnmanaged()
+        protected UnmanagedDisposable()
         {
 
         }
@@ -25,10 +25,7 @@ namespace SolutionsPG.QuickSilver.Commons.Disposables
 
         #region " Finalizer "
 
-        ~DisposableUnmanaged()
-        {
-            Dispose(false);
-        }
+        ~UnmanagedDisposable() => this.Dispose(false);
 
         #endregion //Constructors
 
@@ -36,7 +33,7 @@ namespace SolutionsPG.QuickSilver.Commons.Disposables
 
         void IDisposable.Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
