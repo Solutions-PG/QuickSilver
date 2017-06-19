@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionsPG.QuickSilver.Commons", "SolutionsPG.QuickSilver.Commons\SolutionsPG.QuickSilver.Commons.csproj", "{76A45FAA-4767-4BF0-9719-707EFEFD15BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionsPG.QuickSilver.Core", "SolutionsPG.QuickSilver.Core\SolutionsPG.QuickSilver.Core.csproj", "{76A45FAA-4767-4BF0-9719-707EFEFD15BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionsPG.QuickSilver.Commons.Tests", "SolutionsPG.QuickSilver.Commons.Tests\SolutionsPG.QuickSilver.Commons.Tests.csproj", "{12C65F0E-D861-413A-96AD-E15F013835C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionsPG.QuickSilver.Core.Tests", "SolutionsPG.QuickSilver.Core.Tests\SolutionsPG.QuickSilver.Core.Tests.csproj", "{12C65F0E-D861-413A-96AD-E15F013835C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
