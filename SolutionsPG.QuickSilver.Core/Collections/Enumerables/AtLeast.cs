@@ -2,6 +2,7 @@
 using System.Linq;
 
 using SolutionsPG.QuickSilver.Core.Exceptions;
+using SolutionsPG.QuickSilver.Core.Fluent;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
 {
@@ -9,7 +10,31 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool AtLeast<T, TResult>(this IEnumerable<T> enumerable, int minimumCount) => enumerable.ThrowIfArgumentNull(nameof(enumerable)).Skip(minimumCount - 1).Any();
+        public static bool AtLeastTwo<T, TResult>(this IEnumerable<T> enumerable)
+        {
+            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                return (enumerator.MoveNext() && enumerator.MoveNext());
+            }
+        }
+
+        public static bool AtLeast<T, TResult>(this IEnumerable<T> enumerable, int minimumCount)
+        {
+            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            minimumCount.ThrowIfArgument(minimumCount < 1, nameof(minimumCount));
+
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    if (--minimumCount == 0)
+                        return true;
+                }
+                return false;
+            }
+        }
 
         #endregion //Public methods
 

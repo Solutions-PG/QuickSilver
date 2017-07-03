@@ -7,7 +7,14 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool IsNullOrEmpty<T, TResult>(this IEnumerable<T> enumerable) => (enumerable == null) || (!enumerable.Any());
+        public static bool IsNullOrEmpty<T, TResult>(this IEnumerable<T> enumerable)
+        {
+            if (enumerable == null)
+                return true;
+
+            using (var enumerator = enumerable.GetEnumerator())
+                return !enumerator.MoveNext();
+        }
 
         #endregion //Public methods
 

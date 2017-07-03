@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using SolutionsPG.QuickSilver.Core.Exceptions;
+using SolutionsPG.QuickSilver.Core.Fluent;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
 {
@@ -8,19 +10,29 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool AtMost<T, TResult>(this IEnumerable<T> enumerable, int maximumCount)
+        public static bool ExactlyOne<T>(this IEnumerable<T> enumerable)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
-            maximumCount.ThrowIfArgument(maximumCount < 1, nameof(maximumCount));
+
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                return (enumerator.MoveNext() && !enumerator.MoveNext());
+            }
+        }
+
+        public static bool Exactly<T>(this IEnumerable<T> enumerable, int count)
+        {
+            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            count.ThrowIfArgument(count < 1, nameof(count));
 
             using (var enumerator = enumerable.GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
-                    if (--maximumCount == 0)
+                    if (--count == 0)
                         return !enumerator.MoveNext();
                 }
-                return true;
+                return false;
             }
         }
 

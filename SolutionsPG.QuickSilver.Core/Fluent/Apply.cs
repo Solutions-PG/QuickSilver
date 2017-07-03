@@ -1,5 +1,7 @@
 ﻿using System;
 
+using SolutionsPG.QuickSilver.Core.Exceptions;
+
 namespace SolutionsPG.QuickSilver.Core.Fluent
 {
     public static partial class ObjectExtensions
@@ -19,10 +21,8 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <returns>The caller</returns>
         public static T ApplyIf<T>(this T obj, Func<T, bool> condition, Action<T> action)
         {
-            if (condition == null)
-                throw new ArgumentNullException(nameof(condition));
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
+            condition.ThrowIfArgumentNull(nameof(condition));
+            action.ThrowIfArgumentNull(nameof(action));
 
             return obj.ApplyIf_(condition(obj), action);
         }
@@ -35,13 +35,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="action">Action to be executed</param>
         /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
         /// <returns>The caller</returns>
-        public static T ApplyIfNotNull<T>(this T obj, Action<T> action)
-        {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
-
-            return obj.ApplyIf_(obj != null, action);
-        }
+        public static T ApplyIfNotNull<T>(this T obj, Action<T> action) => obj.ApplyIf_(obj != null, action.ThrowIfArgumentNull(nameof(action)));
 
         /// <summary>
         /// If the condition is true an action using the caller is executed, then the caller is returned.
@@ -52,13 +46,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="action">Action to be executed</param>
         /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
         /// <returns>The caller</returns>
-        public static T ApplyIf<T>(this T obj, bool condition, Action<T> action)
-        {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
-
-            return obj.ApplyIf_(condition, action);
-        }
+        public static T ApplyIf<T>(this T obj, bool condition, Action<T> action) => obj.ApplyIf_(condition, action.ThrowIfArgumentNull(nameof(action)));
 
         /// <summary>
         /// Execute an action on the caller or by using it then return the caller.
@@ -68,13 +56,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="action">Action to be executed</param>
         /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
         /// <returns>The caller</returns>
-        public static T Apply<T>(this T obj, Action<T> action)
-        {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
-
-            return obj.Apply_(action);
-        }
+        public static T Apply<T>(this T obj, Action<T> action) => obj.Apply_(action.ThrowIfArgumentNull(nameof(action)));
 
         #endregion //Public methods
 

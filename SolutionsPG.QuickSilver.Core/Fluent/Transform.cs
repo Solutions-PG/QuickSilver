@@ -1,5 +1,7 @@
 ﻿using System;
 
+using SolutionsPG.QuickSilver.Core.Exceptions;
+
 namespace SolutionsPG.QuickSilver.Core.Fluent
 {
     public static partial class ObjectExtensions
@@ -17,10 +19,8 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <returns>The object transformed if the condition is met. Else Default(TResult)</returns>
         public static TResult TransformIf<T, TResult>(this T obj, Func<T, bool> condition, Func<T, TResult> action)
         {
-            if (condition == null)
-                throw new ArgumentNullException(nameof(condition));
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
+            condition.ThrowIfArgumentNull(nameof(condition));
+            action.ThrowIfArgumentNull(nameof(action));
 
             return obj.TransformIf_(condition(obj), action);
         }
@@ -36,10 +36,8 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <returns>The object transformed, if the condition is met. Else, the caller.</returns>
         public static TResult TransformIfOrSelf<T, TResult>(this T obj, Func<T, bool> condition, Func<T, TResult> action) where T : TResult
         {
-            if (condition == null)
-                throw new ArgumentNullException(nameof(condition));
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
+            condition.ThrowIfArgumentNull(nameof(condition));
+            action.ThrowIfArgumentNull(nameof(action));
 
             return obj.TransformIfOrSelf_(condition(obj), action);
         }
@@ -54,10 +52,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <returns>The object transformed if the caller is not null. Else Default(TResult)</returns>
         public static TResult TransformIfNotNull<T, TResult>(this T obj, Func<T, TResult> action)
         {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
-
-            return obj.TransformIf_(obj != null, action);
+            return obj.TransformIf_(obj != null, action.ThrowIfArgumentNull(nameof(action)));
         }
 
         /// <summary>
@@ -71,10 +66,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <returns>The object transformed if the condition is met. Else Default(TResult)</returns>
         public static TResult TransformIf<T, TResult>(this T obj, bool condition, Func<T, TResult> action)
         {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
-
-            return obj.TransformIf_(condition, action);
+            return obj.TransformIf_(condition, action.ThrowIfArgumentNull(nameof(action)));
         }
 
         /// <summary>
@@ -88,10 +80,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <returns>The object transformed, if the condition is met. Else, the caller.</returns>
         public static TResult TransformIfOrSelf<T, TResult>(this T obj, bool condition, Func<T, TResult> action) where T : TResult
         {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
-
-            return obj.TransformIfOrSelf_(condition, action);
+            return obj.TransformIfOrSelf_(condition, action.ThrowIfArgumentNull(nameof(action)));
         }
 
         /// <summary>
@@ -104,10 +93,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <returns>The object transformed</returns>
         public static TResult Transform<T, TResult>(this T obj, Func<T, TResult> action)
         {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
-
-            return obj.Transform_(action);
+            return obj.Transform_(action.ThrowIfArgumentNull(nameof(action)));
         }
 
         #endregion //Public methods

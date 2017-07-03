@@ -3,7 +3,6 @@
 using SolutionsPG.QuickSilver.Core.Delegates;
 using SolutionsPG.QuickSilver.Core.Exceptions;
 using System;
-using System.Linq;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
 {
@@ -16,21 +15,23 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
 
-            return SelectTryGetIterator(enumerable, dictionary.TryGetValueAsDelegate());
+            return SelectTryGetIterator<T, TResult>(enumerable, dictionary.TryGetValue);
         }
 
         public static IEnumerable<TResult> SelectTryGet<T, TKey, TResult>(this IEnumerable<T> enumerable, Dictionary<TKey, TResult> dictionary, Func<T, TKey> keySelector)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
+            keySelector.ThrowIfArgumentNull(nameof(keySelector));
 
-            return SelectTryGetIterator(enumerable, keySelector, dictionary.TryGetValueAsDelegate());
+            return SelectTryGetIterator<T, TKey, TResult>(enumerable, keySelector, dictionary.TryGetValue);
         }
 
         public static IEnumerable<TResult> SelectTryGet<T, TElement, TResult>(this IEnumerable<T> enumerable, Dictionary<T, TElement> dictionary, Func<TElement, TResult> resultSelector)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
+            resultSelector.ThrowIfArgumentNull(nameof(resultSelector));
 
             return SelectTryGetIterator(enumerable, dictionary.TryGetValue, resultSelector);
         }
@@ -39,7 +40,9 @@ namespace SolutionsPG.QuickSilver.Core.Collections
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
-            
+            keySelector.ThrowIfArgumentNull(nameof(keySelector));
+            resultSelector.ThrowIfArgumentNull(nameof(resultSelector));
+
             return SelectTryGetIterator(enumerable, keySelector, dictionary.TryGetValue, resultSelector);
         }
 
@@ -74,8 +77,8 @@ namespace SolutionsPG.QuickSilver.Core.Collections
         {
             foreach (var item in enumerable)
             {
-                if (tryGet(keySelector(item), out TElement result))
-                    yield return resultSelector(result);
+                if (tryGet(keySelector(item), out TElement element))
+                    yield return resultSelector(element);
             }
         }
 
