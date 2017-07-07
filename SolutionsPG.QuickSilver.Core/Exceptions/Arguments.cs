@@ -14,7 +14,7 @@ namespace SolutionsPG.QuickSilver.Core.Exceptions
 
         public static string ThrowIfArgumentNullOrWhiteSpace(this string obj, string argumentName)
         {
-            argumentName.ThrowIfArgumentNullOrWhiteSpace(nameof(argumentName));
+            argumentName.ThrowIf_(string.IsNullOrWhiteSpace(argumentName), _ => new ArgumentNullException(nameof(argumentName)));
             return obj.ThrowIf_(string.IsNullOrWhiteSpace(obj), _ => new ArgumentNullException(argumentName));
         }
 
