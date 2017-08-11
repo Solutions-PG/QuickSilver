@@ -46,7 +46,7 @@
     <Compile Include="Async\FromResult.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegate.cs" />
     <Compile Include="Collections\Enumerables\Exactly.cs" />
-    <Compile Include="Delegates\Commons.cs" />
+    <Compile Include="Delegates\FuncTryGet.cs" />
     <Compile Include="Disposables\UnmanagedDisposable.cs" />
     <Compile Include="Disposables\TryLock.cs" />
     <Compile Include="Collections\Dictionaries\AsReadOnly.cs" />
