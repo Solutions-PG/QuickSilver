@@ -34,10 +34,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="action">Action to be executed</param>
         /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
         /// <returns>The caller</returns>
-        public static T DoIfNotNull<T>(this T obj, Action action)
-        {
-            return obj.DoIf_(obj != null, action.ThrowIfArgumentNull(nameof(action)));
-        }
+        public static T DoIfNotNull<T>(this T obj, Action action) => obj.DoIf_(obj != null, action.ThrowIfArgumentNull(nameof(action)));
 
         /// <summary>
         /// Execute an action if the condition is true and return the caller.
@@ -48,10 +45,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="action">Action to be executed</param>
         /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
         /// <returns>The caller</returns>
-        public static T DoIf<T>(this T obj, bool condition, Action action)
-        {
-            return obj.DoIf_(condition, action.ThrowIfArgumentNull(nameof(action)));
-        }
+        public static T DoIf<T>(this T obj, bool condition, Action action) => obj.DoIf_(condition, action.ThrowIfArgumentNull(nameof(action)));
 
         /// <summary>
         /// Execute an action and return the caller.
@@ -61,10 +55,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="action">Action to be executed</param>
         /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
         /// <returns>The caller</returns>
-        public static T Do<T>(this T obj, Action action)
-        {
-            return obj.Do_(action.ThrowIfArgumentNull(nameof(action)));
-        }
+        public static T Do<T>(this T obj, Action action) => obj.Do_(action.ThrowIfArgumentNull(nameof(action)));
 
         #endregion //Public methods
 

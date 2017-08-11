@@ -54,6 +54,34 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return SelectTryGetIterator(enumerable, tryGet);
         }
 
+        public static IEnumerable<TResult> SelectTryGet<T, TKey, TResult>(this IEnumerable<T> enumerable, Func<T, TKey> keySelector, FuncTryGet<TKey, TResult> tryGet)
+        {
+            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            keySelector.ThrowIfArgumentNull(nameof(keySelector));
+            tryGet.ThrowIfArgumentNull(nameof(tryGet));
+
+            return SelectTryGetIterator(enumerable, keySelector, tryGet);
+        }
+
+        public static IEnumerable<TResult> SelectTryGet<T, TElement, TResult>(this IEnumerable<T> enumerable, FuncTryGet<T, TElement> tryGet, Func<TElement, TResult> resultSelector)
+        {
+            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            tryGet.ThrowIfArgumentNull(nameof(tryGet));
+            resultSelector.ThrowIfArgumentNull(nameof(resultSelector));
+
+            return SelectTryGetIterator(enumerable, tryGet, resultSelector);
+        }
+
+        public static IEnumerable<TResult> SelectTryGet<T, TKey, TElement, TResult>(this IEnumerable<T> enumerable, Func<T, TKey> keySelector, FuncTryGet<TKey, TElement> tryGet, Func<TElement, TResult> resultSelector)
+        {
+            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            keySelector.ThrowIfArgumentNull(nameof(keySelector));
+            tryGet.ThrowIfArgumentNull(nameof(tryGet));
+            resultSelector.ThrowIfArgumentNull(nameof(resultSelector));
+
+            return SelectTryGetIterator(enumerable, keySelector, tryGet, resultSelector);
+        }
+
         #endregion //Public methods
 
         #region " Private methods "

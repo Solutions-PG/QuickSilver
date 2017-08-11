@@ -8,75 +8,147 @@ namespace SolutionsPG.QuickSilver.Core.Exceptions
 
         public static T ThrowIfArgumentNull<T>(this T obj, string argumentName) where T : class
         {
-            argumentName.ThrowIfArgumentNullOrWhiteSpace(nameof(argumentName));
-            return obj.ThrowIf_(obj == null, _ => new ArgumentNullException(argumentName));
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+
+            return obj.ThrowIfArgumentNull_(argumentName);
         }
 
         public static string ThrowIfArgumentNullOrWhiteSpace(this string obj, string argumentName)
         {
-            argumentName.ThrowIf_(string.IsNullOrWhiteSpace(argumentName), _ => new ArgumentNullException(nameof(argumentName)));
-            return obj.ThrowIf_(string.IsNullOrWhiteSpace(obj), _ => new ArgumentNullException(argumentName));
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+
+            return obj.ThrowIfArgumentNullOrWhiteSpace_(argumentName);
         }
 
         public static T ThrowIfArgumentDefault<T>(this T obj, string argumentName) where T : struct
         {
-            return obj.ThrowIfArgument(obj.Equals(default(T)), argumentName, "Object is still in its default state.");
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+
+            return obj.ThrowIfArgumentDefault_(argumentName);
         }
 
         public static T ThrowIfArgumentEquals<T>(this T obj, T otherObj, string argumentName)
         {
-            return obj.ThrowIfArgumentEquals(otherObj, argumentName, "Object is equals to an invalid state.");
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+
+            return obj.ThrowIfArgumentEquals_(otherObj, argumentName);
         }
 
         public static T ThrowIfArgumentEquals<T>(this T obj, T otherObj, string argumentName, string reasons)
         {
-            if (otherObj == null)
-            {
-                ((object)obj).ThrowIfArgumentNull(argumentName);
-                return obj;
-            }
-
-            return obj.ThrowIfArgument(obj != null && obj.Equals(otherObj), argumentName, reasons);
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+            reasons.ThrowIfArgumentNullOrWhiteSpace_(nameof(reasons));
+            
+            return obj.ThrowIfArgumentEquals_(otherObj, argumentName, reasons);
         }
 
         public static T ThrowIfArgumentNotEquals<T>(this T obj, T otherObj, string argumentName)
         {
-            return obj.ThrowIfArgumentNotEquals(otherObj, argumentName, "Object is not equals to an valid state.");
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+
+            return obj.ThrowIfArgumentNotEquals_(otherObj, argumentName);
         }
 
         public static T ThrowIfArgumentNotEquals<T>(this T obj, T otherObj, string argumentName, string reasons)
         {
-            bool condition = (obj == null) ? (otherObj != null) : (otherObj == null) || !obj.Equals(otherObj);
-            return obj.ThrowIfArgument(condition, argumentName, reasons);
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+            reasons.ThrowIfArgumentNullOrWhiteSpace_(nameof(reasons));
+
+            return obj.ThrowIfArgumentNotEquals_(otherObj, argumentName, reasons);
         }
 
         public static T ThrowIfArgument<T>(this T obj, Func<T, bool> condition, string argumentName)
         {
             condition.ThrowIfArgumentNull(nameof(condition));
-            return obj.ThrowIfArgument(condition(obj), argumentName);
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+
+            return obj.ThrowIfArgument_(condition(obj), argumentName);
         }
 
         public static T ThrowIfArgument<T>(this T obj, Func<T, bool> condition, string argumentName, string reasons)
         {
             condition.ThrowIfArgumentNull(nameof(condition));
-            return obj.ThrowIfArgument(condition(obj), argumentName, reasons);
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+            reasons.ThrowIfArgumentNullOrWhiteSpace_(nameof(reasons));
+
+            return obj.ThrowIfArgument_(condition, argumentName, reasons);
         }
 
         public static T ThrowIfArgument<T>(this T obj, bool condition, string argumentName)
         {
-            return obj.ThrowIfArgument(condition, argumentName, "A condition was not met by the argument.");
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+
+            return obj.ThrowIfArgument_(condition, argumentName);
         }
 
         public static T ThrowIfArgument<T>(this T obj, bool condition, string argumentName, string reasons)
         {
-            argumentName.ThrowIfArgumentNullOrWhiteSpace(nameof(argumentName));
-            reasons.ThrowIfArgumentNullOrWhiteSpace(nameof(reasons));
-            return obj.ThrowIf_(condition, _ => new ArgumentException(reasons, argumentName));
+            argumentName.ThrowIfArgumentNullOrWhiteSpace_(nameof(argumentName));
+            reasons.ThrowIfArgumentNullOrWhiteSpace_(nameof(reasons));
+
+            return obj.ThrowIfArgument_(condition, argumentName, reasons);
         }
 
         #endregion //Public methods
 
         #region " Private methods "
+
+        private static T ThrowIfArgumentNull_<T>(this T obj, string argumentName) where T : class
+        {
+            return obj.ThrowIf_(obj == null, _ => new ArgumentNullException(argumentName));
+        }
+
+        private static string ThrowIfArgumentNullOrWhiteSpace_(this string obj, string argumentName)
+        {
+            return obj.ThrowIf_(string.IsNullOrWhiteSpace(obj), _ => new ArgumentNullException(argumentName));
+        }
+
+        private static T ThrowIfArgumentDefault_<T>(this T obj, string argumentName) where T : struct
+        {
+            return obj.ThrowIfArgumentEquals_(default(T), argumentName, "Object is equals to an invalid state.");
+        }
+
+        private static T ThrowIfArgumentEquals_<T>(this T obj, T otherObj, string argumentName)
+        {
+            return obj.ThrowIfArgumentEquals_(otherObj, argumentName, "Object is equals to an invalid state.");
+        }
+
+        private static T ThrowIfArgumentEquals_<T>(this T obj, T otherObj, string argumentName, string reasons)
+        {
+            bool condition = (obj == null) ? (otherObj == null) : (otherObj != null) && obj.Equals(otherObj);
+            return obj.ThrowIfArgument_(condition, argumentName, reasons);
+        }
+
+        private static T ThrowIfArgumentNotEquals_<T>(this T obj, T otherObj, string argumentName)
+        {
+            return obj.ThrowIfArgumentNotEquals_(otherObj, argumentName, "Object is not equals to an valid state.");
+        }
+
+        private static T ThrowIfArgumentNotEquals_<T>(this T obj, T otherObj, string argumentName, string reasons)
+        {
+            bool condition = (obj == null) ? (otherObj != null) : (otherObj == null) || !obj.Equals(otherObj);
+            return obj.ThrowIfArgument_(condition, argumentName, reasons);
+        }
+
+        private static T ThrowIfArgument_<T>(this T obj, Func<T, bool> condition, string argumentName)
+        {
+            return obj.ThrowIfArgument_(condition(obj), argumentName);
+        }
+
+        private static T ThrowIfArgument_<T>(this T obj, Func<T, bool> condition, string argumentName, string reasons)
+        {
+            return obj.ThrowIfArgument_(condition(obj), argumentName, reasons);
+        }
+
+        private static T ThrowIfArgument_<T>(this T obj, bool condition, string argumentName)
+        {
+            return obj.ThrowIfArgument_(condition, argumentName, "A condition was not met by the argument.");
+        }
+
+        private static T ThrowIfArgument_<T>(this T obj, bool condition, string argumentName, string reasons)
+        {
+            return obj.ThrowIf_(condition, _ => new ArgumentException(reasons, argumentName));
+        }
 
         #endregion //Private methods
     }

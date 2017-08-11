@@ -17,8 +17,8 @@ namespace SolutionsPG.QuickSilver.Core.Exceptions
         /// <returns>The caller if the condition hasn't been met. Else an exception of type TException is thrown</returns>
         public static T ThrowIf<T, TException>(this T obj, Func<T, bool> condition, Func<T, TException> createException) where TException : Exception
         {
-            condition.ThrowIfArgumentNull(nameof(condition));
-            createException.ThrowIfArgumentNull(nameof(createException));
+            condition.ThrowIfArgumentNull_(nameof(condition));
+            createException.ThrowIfArgumentNull_(nameof(createException));
 
             return obj.ThrowIf_(condition(obj), createException);
         }
@@ -33,7 +33,7 @@ namespace SolutionsPG.QuickSilver.Core.Exceptions
         /// <returns>The caller if the caller is not null. Else an exception of type TException is thrown</returns>
         public static T ThrowIfNull<T, TException>(this T obj, Func<T, TException> createException) where TException : Exception
         {
-            createException.ThrowIfArgumentNull(nameof(createException));
+            createException.ThrowIfArgumentNull_(nameof(createException));
 
             return obj.ThrowIf_(obj == null, createException);
         }
@@ -49,7 +49,7 @@ namespace SolutionsPG.QuickSilver.Core.Exceptions
         /// <returns>The caller if the condition hasn't been met. Else an exception of type TException is thrown</returns>
         public static T ThrowIf<T, TException>(this T obj, bool condition, Func<T, TException> createException) where TException : Exception
         {
-            createException.ThrowIfArgumentNull(nameof(createException));
+            createException.ThrowIfArgumentNull_(nameof(createException));
 
             return obj.ThrowIf_(condition, createException);
         }
@@ -63,7 +63,7 @@ namespace SolutionsPG.QuickSilver.Core.Exceptions
         /// <param name="createException">Action creating the exception to throw</param>
         public static void Throw<T, TException>(this T obj, Func<T, TException> createException) where TException : Exception
         {
-            createException.ThrowIfArgumentNull(nameof(createException));
+            createException.ThrowIfArgumentNull_(nameof(createException));
 
             obj.Throw_(createException);
         }
