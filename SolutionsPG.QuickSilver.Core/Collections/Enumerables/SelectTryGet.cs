@@ -18,7 +18,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return SelectTryGetIterator<T, TResult>(enumerable, dictionary.TryGetValue);
         }
 
-        public static IEnumerable<TResult> SelectTryGet<T, TKey, TResult>(this IEnumerable<T> enumerable, Dictionary<TKey, TResult> dictionary, Func<T, TKey> keySelector)
+        public static IEnumerable<TResult> SelectTryGet<T, TKey, TResult>(this IEnumerable<T> enumerable, Func<T, TKey> keySelector, Dictionary<TKey, TResult> dictionary)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
@@ -36,7 +36,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return SelectTryGetIterator(enumerable, dictionary.TryGetValue, resultSelector);
         }
 
-        public static IEnumerable<TResult> SelectTryGet<T, TKey, TElement, TResult>(this IEnumerable<T> enumerable, Dictionary<TKey, TElement> dictionary, Func<T, TKey> keySelector, Func<TElement, TResult> resultSelector)
+        public static IEnumerable<TResult> SelectTryGet<T, TKey, TElement, TResult>(this IEnumerable<T> enumerable, Func<T, TKey> keySelector, Dictionary<TKey, TElement> dictionary, Func<TElement, TResult> resultSelector)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
@@ -86,22 +86,22 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #region " Private methods "
 
-        public static IEnumerable<TResult> SelectTryGetIterator<T, TResult>(IEnumerable<T> enumerable, FuncTryGet<T, TResult> tryGet)
+        private static IEnumerable<TResult> SelectTryGetIterator<T, TResult>(IEnumerable<T> enumerable, FuncTryGet<T, TResult> tryGet)
         {
             return SelectTryGetIterator(enumerable, i => i, tryGet, r => r);
         }
 
-        public static IEnumerable<TResult> SelectTryGetIterator<T, TKey, TResult>(IEnumerable<T> enumerable, Func<T, TKey> keySelector, FuncTryGet<TKey, TResult> tryGet)
+        private static IEnumerable<TResult> SelectTryGetIterator<T, TKey, TResult>(IEnumerable<T> enumerable, Func<T, TKey> keySelector, FuncTryGet<TKey, TResult> tryGet)
         {
             return SelectTryGetIterator(enumerable, keySelector, tryGet, i => i);
         }
 
-        public static IEnumerable<TResult> SelectTryGetIterator<T, TElement, TResult>(IEnumerable<T> enumerable, FuncTryGet<T, TElement> tryGet, Func<TElement, TResult> resultSelector)
+        private static IEnumerable<TResult> SelectTryGetIterator<T, TElement, TResult>(IEnumerable<T> enumerable, FuncTryGet<T, TElement> tryGet, Func<TElement, TResult> resultSelector)
         {
             return SelectTryGetIterator(enumerable, i => i, tryGet, resultSelector);
         }
 
-        public static IEnumerable<TResult> SelectTryGetIterator<T, TKey, TElement, TResult>(IEnumerable<T> enumerable, Func<T, TKey> keySelector, FuncTryGet<TKey, TElement> tryGet, Func<TElement, TResult> resultSelector)
+        private static IEnumerable<TResult> SelectTryGetIterator<T, TKey, TElement, TResult>(IEnumerable<T> enumerable, Func<T, TKey> keySelector, FuncTryGet<TKey, TElement> tryGet, Func<TElement, TResult> resultSelector)
         {
             foreach (var item in enumerable)
             {

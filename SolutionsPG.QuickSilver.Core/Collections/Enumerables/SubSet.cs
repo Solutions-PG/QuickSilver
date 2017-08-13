@@ -17,9 +17,24 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             index.ThrowIfArgument(index < 0, nameof(index));
             quantity.ThrowIfArgument(quantity <= 0, nameof(quantity));
 
-            return enumerable
-                .TransformIfOrSelf((index > 0), e => e.Skip(index))
-                .Take(quantity);
+            return Iterator();
+
+            IEnumerable<T> Iterator()
+            {
+                using (var enumerator = enumerable.GetEnumerator())
+                {
+                    while (index > 0 && enumerator.MoveNext()) { --index; }
+
+                    if (index == 0)
+                    {
+                        while (quantity > 0 && enumerator.MoveNext())
+                        {
+                            --quantity;
+                            yield return enumerator.Current;
+                        }
+                    }
+                }
+            }
         }
 
         public static IEnumerable<T> Subset<T>(this IEnumerable<T> enumerable, Func<T, bool> skipWhile, int quantity)
@@ -28,7 +43,36 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             skipWhile.ThrowIfArgumentNull(nameof(skipWhile));
             quantity.ThrowIfArgument(quantity <= 0, nameof(quantity));
 
-            return enumerable.SkipWhile(skipWhile).Take(quantity);
+            return Iterator();
+
+            IEnumerable<T> Iterator()
+            {
+                using (var enumerator = enumerable.GetEnumerator())
+                {
+                    if (enumerator.MoveNext())
+                    {
+                        bool canTake = true;
+
+                        while (skipWhile(enumerator.Current))
+                        {
+                            if (enumerator.MoveNext() == false)
+                            {
+                                canTake = false;
+                                break;
+                            }
+                        }
+
+                        if (canTake && quantity > 0)
+                        {
+                            do
+                            {
+                                --quantity;
+                                yield return enumerator.Current;
+                            } while (quantity > 0 && enumerator.MoveNext());
+                        }
+                    }
+                }
+            }
         }
 
         public static IEnumerable<T> Subset<T>(this IEnumerable<T> enumerable, int index, Func<T, bool> takeWhile)
@@ -37,9 +81,24 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             index.ThrowIfArgument(index < 0, nameof(index));
             takeWhile.ThrowIfArgumentNull(nameof(takeWhile));
 
-            return enumerable
-                .TransformIfOrSelf((index > 0), e => e.Skip(index))
-                .TakeWhile(takeWhile);
+            return Iterator();
+
+            IEnumerable<T> Iterator()
+            {
+                using (var enumerator = enumerable.GetEnumerator())
+                {
+                    while (index > 0 && enumerator.MoveNext()) { --index; }
+
+                    if (index == 0)
+                    {
+                        T currentItem;
+                        while (enumerator.MoveNext() && takeWhile(currentItem = enumerator.Current))
+                        {
+                            yield return currentItem;
+                        }
+                    }
+                }
+            }
         }
 
         public static IEnumerable<T> Subset<T>(this IEnumerable<T> enumerable, Func<T, bool> skipWhile, Func<T, bool> takeWhile)
@@ -48,7 +107,38 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             skipWhile.ThrowIfArgumentNull(nameof(skipWhile));
             takeWhile.ThrowIfArgumentNull(nameof(takeWhile));
 
-            return enumerable.SkipWhile(skipWhile).TakeWhile(takeWhile);
+            return Iterator();
+
+            IEnumerable<T> Iterator()
+            {
+                using (var enumerator = enumerable.GetEnumerator())
+                {
+                    if (enumerator.MoveNext())
+                    {
+                        bool canTake = true;
+                        T currentItem = enumerator.Current;
+
+                        while (skipWhile(currentItem))
+                        {
+                            if (enumerator.MoveNext() == false)
+                            {
+                                canTake = false;
+                                break;
+                            }
+
+                            currentItem = enumerator.Current;
+                        }
+                        
+                        if (canTake && takeWhile(currentItem))
+                        {
+                            do
+                            {
+                                yield return currentItem;
+                            } while (enumerator.MoveNext() && takeWhile(currentItem = enumerator.Current));
+                        }
+                    }
+                }
+            }
         }
 
         #endregion //Public methods

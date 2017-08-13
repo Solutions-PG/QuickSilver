@@ -8,6 +8,16 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
+        public static bool AtMostOne<T, TResult>(this IEnumerable<T> enumerable)
+        {
+            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                return (!enumerator.MoveNext() || !enumerator.MoveNext());
+            }
+        }
+
         public static bool AtMost<T, TResult>(this IEnumerable<T> enumerable, int maximumCount)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));

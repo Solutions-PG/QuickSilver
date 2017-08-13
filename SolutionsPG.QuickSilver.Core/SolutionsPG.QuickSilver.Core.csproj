@@ -44,8 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Async\FromResult.cs" />
+    <Compile Include="Collections\Dictionaries\ToLookup.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegate.cs" />
     <Compile Include="Collections\Enumerables\Exactly.cs" />
+    <Compile Include="Collections\Enumerables\AsStream..cs" />
+    <Compile Include="Collections\Enumerables\Memoize.cs" />
+    <Compile Include="Collections\Enumerables\TryGetElementAt.cs" />
     <Compile Include="Delegates\FuncTryGet.cs" />
     <Compile Include="Disposables\UnmanagedDisposable.cs" />
     <Compile Include="Disposables\TryLock.cs" />

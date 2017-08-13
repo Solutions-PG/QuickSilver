@@ -26,47 +26,23 @@ namespace SolutionsPG.QuickSilver.Core.Delegates
             tryGet.ThrowIfArgumentNull(nameof(tryGet));
             tryGetIfNotFound.ThrowIfArgumentNull(nameof(tryGetIfNotFound));
 
-            return new FuncTryGetCombinator<T, TResult>(tryGet, tryGetIfNotFound).TryGetValue;
+            return CombinedTryGetValue;
+
+            bool CombinedTryGetValue(T t, out TResult result)
+            {
+                return tryGet(t, out result) || tryGetIfNotFound(t, out result);
+            }
         }
 
         private static FuncTryGet<T, TResult> AsFuncTryGet_<T, TResult>(this Func<T, TResult> action, bool returnValue)
         {
-            return new FuncTryGetWrapper<T, TResult>(action, returnValue).TryGetValue;
-        }
-    }
+            return FuncTryGetWrapper;
 
-    internal struct FuncTryGetWrapper<T, TResult>
-    {
-        private readonly Func<T, TResult> _action;
-        private readonly bool _returnValue;
-
-        public FuncTryGetWrapper(Func<T, TResult> action, bool returnValue)
-        {
-            _action = action;
-            _returnValue = returnValue;
-        }
-
-        public bool TryGetValue(T t, out TResult result)
-        {
-            result = _action(t);
-            return _returnValue;
-        }
-    }
-
-    internal struct FuncTryGetCombinator<T, TResult>
-    {
-        private readonly FuncTryGet<T, TResult> _tryGet;
-        private readonly FuncTryGet<T, TResult> _tryGetIfNotFound;
-
-        public FuncTryGetCombinator(FuncTryGet<T, TResult> tryGet, FuncTryGet<T, TResult> tryGetIfNotFound)
-        {
-            _tryGet = tryGet;
-            _tryGetIfNotFound = tryGetIfNotFound;
-        }
-
-        public bool TryGetValue(T t, out TResult result)
-        {
-            return _tryGet(t, out result) || _tryGetIfNotFound(t, out result);
+            bool FuncTryGetWrapper(T t, out TResult result)
+            {
+                result = action(t);
+                return returnValue;
+            }
         }
     }
 }
