@@ -6,6 +6,9 @@ using System;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
 {
+    /// <summary>
+    /// Contains extensions related to dictionaries
+    /// </summary>
     public static partial class DictionaryExtensions
     {
         #region " Public methods "

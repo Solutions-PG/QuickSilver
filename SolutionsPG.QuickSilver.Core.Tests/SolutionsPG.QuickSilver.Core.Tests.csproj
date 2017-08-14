@@ -8,8 +8,8 @@
     <ProjectGuid>{12C65F0E-D861-413A-96AD-E15F013835C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolutionsPG.QuickSilver.CommonsTests</RootNamespace>
-    <AssemblyName>SolutionsPG.QuickSilver.CommonsTests</AssemblyName>
+    <RootNamespace>SolutionsPG.QuickSilver.Core.Tests</RootNamespace>
+    <AssemblyName>SolutionsPG.QuickSilver.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -57,6 +57,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Async\AsyncExtensions\FromResultTests.cs" />
+    <Compile Include="Collections\Dictionaries\AsReadOnlyTest.cs" />
+    <Compile Include="Collections\Dictionaries\ToLookupTest.cs" />
+    <Compile Include="Collections\Dictionaries\TryGetValueAsDelegateTest.cs" />
     <Compile Include="Fluent\ApplyTests.cs" />
     <Compile Include="Fluent\DoTests.cs" />
     <Compile Include="Exceptions\ThrowTests.cs" />

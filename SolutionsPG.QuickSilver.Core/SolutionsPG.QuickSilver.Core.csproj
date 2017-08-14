@@ -8,8 +8,8 @@
     <ProjectGuid>{76A45FAA-4767-4BF0-9719-707EFEFD15BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolutionsPG.QuickSilver.Commons</RootNamespace>
-    <AssemblyName>SolutionsPG.QuickSilver.Commons</AssemblyName>
+    <RootNamespace>SolutionsPG.QuickSilver.Core</RootNamespace>
+    <AssemblyName>SolutionsPG.QuickSilver.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
