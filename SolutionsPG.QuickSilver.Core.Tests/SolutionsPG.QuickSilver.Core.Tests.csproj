@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="Async\AsyncExtensions\FromResultTests.cs" />
     <Compile Include="Collections\Dictionaries\AsReadOnlyTest.cs" />
-    <Compile Include="Collections\Dictionaries\ToLookupTest.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegateTest.cs" />
     <Compile Include="Fluent\ApplyTests.cs" />
     <Compile Include="Fluent\DoTests.cs" />
