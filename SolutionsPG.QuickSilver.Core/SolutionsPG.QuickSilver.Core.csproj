@@ -55,6 +55,7 @@
     <Compile Include="Collections\Enumerables\AsQueue..cs" />
     <Compile Include="Collections\Enumerables\Memoize.cs" />
     <Compile Include="Collections\Enumerables\TryGetElementAt.cs" />
+    <Compile Include="Delegates\Combine.cs" />
     <Compile Include="Delegates\FuncTryGet.cs" />
     <Compile Include="Disposables\UnmanagedDisposable.cs" />
     <Compile Include="Disposables\TryLock.cs" />

@@ -23,16 +23,6 @@ namespace SolutionsPG.QuickSilver.Core.Delegates
             return action.AsFuncTryGet_(returnValue);
         }
 
-        public static FuncTryGet<T, TResult> CombineWithFallback<T, TResult>(this FuncTryGet<T, TResult> tryGet, FuncTryGet<T, TResult> tryGetIfNotFound)
-        {
-            tryGet.ThrowIfArgumentNull(nameof(tryGet));
-            tryGetIfNotFound.ThrowIfArgumentNull(nameof(tryGetIfNotFound));
-
-            return CombinedTryGetValue;
-
-            bool CombinedTryGetValue(T t, out TResult result) => tryGet(t, out result) || tryGetIfNotFound(t, out result);
-        }
-
         #endregion //Public methods
 
         #region " Private methods "
