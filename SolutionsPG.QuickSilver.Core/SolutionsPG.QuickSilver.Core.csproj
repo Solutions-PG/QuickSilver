@@ -47,6 +47,8 @@
     <Compile Include="Collections\Dictionaries\ToLookup.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegate.cs" />
     <Compile Include="Collections\Enumerables\ContainsAll.cs" />
+    <Compile Include="Collections\Enumerables\Contains.cs" />
+    <Compile Include="Collections\Enumerables\ContainsNone.cs" />
     <Compile Include="Collections\Enumerables\ContainsAny.cs" />
     <Compile Include="Collections\Enumerables\In.cs" />
     <Compile Include="Collections\Enumerables\Exactly.cs" />

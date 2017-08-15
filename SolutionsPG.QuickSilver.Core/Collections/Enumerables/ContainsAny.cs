@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 using SolutionsPG.QuickSilver.Core.Exceptions;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
@@ -45,7 +44,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(objToVerify, comparer);
         }
 
-        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, params TObj[] objToVerify) where TObj : TItem
+        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, params TObj[] objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             comparison.ThrowIfArgumentNull(nameof(comparison));
@@ -54,7 +53,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(objToVerify, comparison);
         }
 
-        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison) where TObj : TItem
+        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -83,7 +82,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             bool EnumerableContainsObject(TItem o) => memoizedEnumerable.Contains(o, comparer);
         }
 
-        private static bool ContainsAny_<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison) where TObj : TItem
+        private static bool ContainsAny_<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison)
         {
             ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
             return objToVerify.Any(EnumerableContainsObject);
