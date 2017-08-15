@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 using SolutionsPG.QuickSilver.Core.Exceptions;
 using System;
@@ -25,7 +24,9 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
             keySelector.ThrowIfArgumentNull(nameof(keySelector));
 
-            return dictionary.GroupToDictionary(kvp => keySelector(kvp.Value), kvp => kvp.Key);
+            return dictionary.GroupToDictionary(GetResultKey, kvp => kvp.Key);
+
+            TResultKey GetResultKey(KeyValuePair<TSourceKey, TSourceValue> kvp) => keySelector(kvp.Value);
         }
 
         public static IReadOnlyDictionary<TSourceValue, IReadOnlyList<TResultValue>> ToLookup<TSourceKey, TSourceValue, TResultValue>(this IReadOnlyDictionary<TSourceKey, TSourceValue> dictionary, Func<TSourceKey, TResultValue> valueSelector)
@@ -33,7 +34,9 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             dictionary.ThrowIfArgumentNull(nameof(dictionary));
             valueSelector.ThrowIfArgumentNull(nameof(valueSelector));
 
-            return dictionary.GroupToDictionary(kvp => kvp.Value, kvp => valueSelector(kvp.Key));
+            return dictionary.GroupToDictionary(kvp => kvp.Value, GetResultValue);
+
+            TResultValue GetResultValue(KeyValuePair<TSourceKey, TSourceValue> kvp) => valueSelector(kvp.Key);
         }
 
         public static IReadOnlyDictionary<TResultKey, IReadOnlyList<TResultValue>> ToLookup<TSourceKey, TSourceValue, TResultKey, TResultValue>(this IReadOnlyDictionary<TSourceKey, TSourceValue> dictionary, Func<TSourceValue, TResultKey> keySelector, Func<TSourceKey, TResultValue> valueSelector)
@@ -42,7 +45,10 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             keySelector.ThrowIfArgumentNull(nameof(keySelector));
             valueSelector.ThrowIfArgumentNull(nameof(valueSelector));
 
-            return dictionary.GroupToDictionary(kvp => keySelector(kvp.Value), kvp => valueSelector(kvp.Key));
+            return dictionary.GroupToDictionary(GetResultKey, GetResultValue);
+
+            TResultKey GetResultKey(KeyValuePair<TSourceKey, TSourceValue> kvp) => keySelector(kvp.Value);
+            TResultValue GetResultValue(KeyValuePair<TSourceKey, TSourceValue> kvp) => valueSelector(kvp.Key);
         }
 
         public static IReadOnlyDictionary<TSourceValue, IReadOnlyList<TSourceKey>> ToLookup<TSourceKey, TSourceValue>(this IReadOnlyDictionary<TSourceKey, IReadOnlyList<TSourceValue>> dictionary)

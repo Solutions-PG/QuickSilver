@@ -1,4 +1,4 @@
-﻿namespace SolutionsPG.QuickSilver.Core.Collections
+﻿namespace SolutionsPG.QuickSilver.Core.Strings
 {
     public static partial class StringExtensions
     {

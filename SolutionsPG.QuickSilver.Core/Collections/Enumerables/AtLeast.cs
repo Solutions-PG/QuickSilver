@@ -10,7 +10,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool AtLeastTwo<T, TResult>(this IEnumerable<T> enumerable)
+        public static bool AtLeastTwo<T>(this IEnumerable<T> enumerable)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
 
@@ -20,7 +20,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             }
         }
 
-        public static bool AtLeast<T, TResult>(this IEnumerable<T> enumerable, int minimumCount)
+        public static bool AtLeast<T>(this IEnumerable<T> enumerable, int minimumCount)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             minimumCount.ThrowIfArgument(minimumCount < 1, nameof(minimumCount));

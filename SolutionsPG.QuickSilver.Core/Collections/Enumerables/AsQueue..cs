@@ -9,20 +9,18 @@ using System.Linq;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
 {
-    public interface IStreamed<T> : IEnumerable<T>
+    public interface IQueuedEnumerable<out T> : IEnumerable<T>
     {
-        IStreamed<T> Reset();
+        IQueuedEnumerable<T> Reset();
     }
 
     public static partial class EnumerableExtensions
     {
         #region " Public methods "
 
-        public static IStreamed<T> AsStream<T>(this IEnumerable<T> enumerable)
+        public static IQueuedEnumerable<T> AsQueue<T>(this IEnumerable<T> enumerable)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
-
-            return new StreamIterator<T>(enumerable);
+            return new QueueIterator<T>(enumerable.ThrowIfArgumentNull(nameof(enumerable)));
         }
 
         #endregion //Public methods
@@ -31,7 +29,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #endregion //Private methods
 
-        private class StreamIterator<T> : IStreamed<T>
+        private class QueueIterator<T> : IQueuedEnumerable<T>
         {
             #region " Const "
 
@@ -59,7 +57,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             #region " Constructors "
 
-            public StreamIterator(IEnumerable<T> source)
+            public QueueIterator(IEnumerable<T> source)
             {
                 this._source = source;
             }
@@ -101,7 +99,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
                 return this.GetEnumerator();
             }
 
-            public IStreamed<T> Reset()
+            public IQueuedEnumerable<T> Reset()
             {
                 if (_state != State.NotStarted)
                 {

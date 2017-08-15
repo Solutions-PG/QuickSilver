@@ -7,7 +7,12 @@ namespace SolutionsPG.QuickSilver.Core.Strings
     {
         #region " Public methods "
 
-        public static StringBuilder AsMutable(this string str) => new StringBuilder(str.ThrowIfArgumentNull(nameof(str)));
+        public static string Simplify(this string str)
+        {
+            str.ThrowIfArgumentNullOrWhiteSpace(nameof(str));
+
+            return Encoding.UTF8.GetString(Encoding.GetEncoding("ISO-8859-8").GetBytes(str.ToUpper()));
+        }
 
         #endregion //Public methods
 

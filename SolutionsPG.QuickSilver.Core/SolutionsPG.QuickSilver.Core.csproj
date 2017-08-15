@@ -46,8 +46,11 @@
     <Compile Include="Async\FromResult.cs" />
     <Compile Include="Collections\Dictionaries\ToLookup.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegate.cs" />
+    <Compile Include="Collections\Enumerables\ContainsAll.cs" />
+    <Compile Include="Collections\Enumerables\ContainsAny.cs" />
+    <Compile Include="Collections\Enumerables\In.cs" />
     <Compile Include="Collections\Enumerables\Exactly.cs" />
-    <Compile Include="Collections\Enumerables\AsStream..cs" />
+    <Compile Include="Collections\Enumerables\AsQueue..cs" />
     <Compile Include="Collections\Enumerables\Memoize.cs" />
     <Compile Include="Collections\Enumerables\TryGetElementAt.cs" />
     <Compile Include="Delegates\FuncTryGet.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Helpers\ComparerHelper.cs" />
     <Compile Include="Helpers\EqualityComparerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strings\Simplify.cs" />
     <Compile Include="Strings\AsMutable.cs" />
     <Compile Include="Strings\IsNullOr.cs" />
   </ItemGroup>

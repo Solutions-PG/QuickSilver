@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using SolutionsPG.QuickSilver.Core.Exceptions;
-using SolutionsPG.QuickSilver.Core.Fluent;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
 {

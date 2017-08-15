@@ -10,7 +10,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool ExactlyOne<T>(this IEnumerable<T> enumerable)
+        public static bool One<T>(this IEnumerable<T> enumerable)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
 

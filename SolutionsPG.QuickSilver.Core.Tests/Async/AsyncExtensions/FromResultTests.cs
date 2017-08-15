@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SolutionsPG.QuickSilver.Core.Tests.Async.AsyncExtensions
 {
     [TestClass]
-    public class ThrowTests
+    public class FromResultTests
     {
         #region " Tests management "
 

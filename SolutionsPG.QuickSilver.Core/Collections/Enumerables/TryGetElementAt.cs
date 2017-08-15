@@ -35,14 +35,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         public static FuncTryGet<int, T> TryGetElementAtAsDelegate<T>(this IEnumerable<T> source)
         {
-            source.ThrowIfArgumentNull(nameof(source));
-
-            return TryGetElementAtAsFuncTryGet;
-
-            bool TryGetElementAtAsFuncTryGet(int t, out T result)
-            {
-                return source.TryGetElementAt(t, out result);
-            }
+            return source.ThrowIfArgumentNull(nameof(source)).TryGetElementAt;
         }
 
         #endregion //Public methods

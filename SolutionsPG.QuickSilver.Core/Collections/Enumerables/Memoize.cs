@@ -15,9 +15,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         public static IMemoized<T> Memoize<T>(this IEnumerable<T> enumerable)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
-            
-            return new MemoizeIterator<T>(enumerable);
+            return new MemoizeIterator<T>(enumerable.ThrowIfArgumentNull(nameof(enumerable)));
         }
 
         #endregion //Public methods
@@ -41,7 +39,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             #region " Variables "
 
-            private readonly IStreamed<T> _streamedSource;
+            private readonly IQueuedEnumerable<T> _streamedSource;
             private readonly List<T> _cache;
             
             private IEnumerable<T> _iterator;
@@ -53,7 +51,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             public MemoizeIterator(IEnumerable<T> source)
             {
-                _streamedSource = source.AsStream();
+                _streamedSource = source.AsQueue();
                 _cache = new List<T>();
             }
 
@@ -187,10 +185,9 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             private IEnumerable<T> Iterator()
             {
-                int count = _cache.Count;
-                for (int i = 0; i < count; ++i)
+                foreach (var item in _cache)
                 {
-                    yield return _cache[i];
+                    yield return item;
                 }
 
                 switch (_state)
@@ -200,7 +197,11 @@ namespace SolutionsPG.QuickSilver.Core.Collections
                         goto case State.InProgress;
 
                     case State.InProgress:
-                        foreach(var item in _streamedSource) { yield return item; }
+                        foreach (var item in _streamedSource)
+                        {
+                            _cache.Add(item);
+                            yield return item;
+                        }
                         _state = State.Completed;
                         //goto case State.Completed;
                         break;
