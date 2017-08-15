@@ -64,19 +64,19 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         private static bool In_<TObj, TItem>(this TObj obj, IEnumerable<TItem> enumerable) where TObj : TItem
         {
-            return enumerable.ThrowIfArgumentNull(nameof(enumerable)).Contains(obj);
+            return enumerable.Contains(obj);
         }
 
         private static bool InAny_<TObj, TItem>(this TObj obj, IEnumerable<IEnumerable<TItem>> enumerable) where TObj : TItem
         {
-            return enumerable.ThrowIfArgumentNull(nameof(enumerable)).Any(EnumerableContainsObj);
+            return enumerable.Any(EnumerableContainsObj);
 
             bool EnumerableContainsObj(IEnumerable<TItem> e) => e?.Contains(obj) ?? false;
         }
 
         private static bool InAll_<TObj, TItem>(this TObj obj, IEnumerable<IEnumerable<TItem>> enumerable) where TObj : TItem
         {
-            return enumerable.ThrowIfArgumentNull(nameof(enumerable)).All(EnumerableContainsObj);
+            return enumerable.All(EnumerableContainsObj);
 
             bool EnumerableContainsObj(IEnumerable<TItem> e) => e?.Contains(obj) ?? false;
         }

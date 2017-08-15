@@ -7,6 +7,8 @@ namespace SolutionsPG.QuickSilver.Core.Delegates
 
     public static class FuncTryGetExtensions
     {
+        #region " Public methods "
+
         public static FuncTryGet<T, TResult> AsFuncTryGet<T, TResult>(this Func<T, TResult> action)
         {
             action.ThrowIfArgumentNull(nameof(action));
@@ -21,18 +23,19 @@ namespace SolutionsPG.QuickSilver.Core.Delegates
             return action.AsFuncTryGet_(returnValue);
         }
 
-        public static FuncTryGet<T, TResult> CombineWith<T, TResult>(this FuncTryGet<T, TResult> tryGet, FuncTryGet<T, TResult> tryGetIfNotFound)
+        public static FuncTryGet<T, TResult> CombineWithFallback<T, TResult>(this FuncTryGet<T, TResult> tryGet, FuncTryGet<T, TResult> tryGetIfNotFound)
         {
             tryGet.ThrowIfArgumentNull(nameof(tryGet));
             tryGetIfNotFound.ThrowIfArgumentNull(nameof(tryGetIfNotFound));
 
             return CombinedTryGetValue;
 
-            bool CombinedTryGetValue(T t, out TResult result)
-            {
-                return tryGet(t, out result) || tryGetIfNotFound(t, out result);
-            }
+            bool CombinedTryGetValue(T t, out TResult result) => tryGet(t, out result) || tryGetIfNotFound(t, out result);
         }
+
+        #endregion //Public methods
+
+        #region " Private methods "
 
         private static FuncTryGet<T, TResult> AsFuncTryGet_<T, TResult>(this Func<T, TResult> action, bool returnValue)
         {
@@ -44,5 +47,7 @@ namespace SolutionsPG.QuickSilver.Core.Delegates
                 return returnValue;
             }
         }
+
+        #endregion //Private methods
     }
 }
