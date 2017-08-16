@@ -34,7 +34,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="condition">Delegate returning if a condition has been met</param>
         /// <param name="action">Action transforming the object</param>
         /// <returns>The object transformed, if the condition is met. Else, the caller.</returns>
-        public static TResult TransformIfOrSelf<T, TResult>(this T obj, Func<T, bool> condition, Func<T, TResult> action) where T : TResult
+        public static T TransformIfOrSelf<T, TResult>(this T obj, Func<T, bool> condition, Func<T, TResult> action) where TResult : T
         {
             condition.ThrowIfArgumentNull(nameof(condition));
             action.ThrowIfArgumentNull(nameof(action));
@@ -78,7 +78,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
         /// <param name="condition">Condition to meet to transform the object</param>
         /// <param name="action">Action transforming the object</param>
         /// <returns>The object transformed, if the condition is met. Else, the caller.</returns>
-        public static TResult TransformIfOrSelf<T, TResult>(this T obj, bool condition, Func<T, TResult> action) where T : TResult
+        public static T TransformIfOrSelf<T, TResult>(this T obj, bool condition, Func<T, TResult> action) where TResult : T
         {
             return obj.TransformIfOrSelf_(condition, action.ThrowIfArgumentNull(nameof(action)));
         }
@@ -100,7 +100,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
 
         #region " Private methods "
 
-        private static TResult TransformIfOrSelf_<T, TResult>(this T obj, bool condition, Func<T, TResult> action) where T : TResult => (condition) ? action(obj) : obj;
+        private static T TransformIfOrSelf_<T, TResult>(this T obj, bool condition, Func<T, TResult> action) where TResult : T => (condition) ? action(obj) : obj;
         private static TResult TransformIf_<T, TResult>(this T obj, bool condition, Func<T, TResult> action) => (condition) ? action(obj) : default(TResult);
         private static TResult Transform_<T, TResult>(this T obj, Func<T, TResult> action) => action(obj);
 

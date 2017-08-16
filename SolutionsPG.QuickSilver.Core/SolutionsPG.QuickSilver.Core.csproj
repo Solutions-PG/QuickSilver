@@ -46,6 +46,7 @@
     <Compile Include="Async\FromResult.cs" />
     <Compile Include="Collections\Dictionaries\ToLookup.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegate.cs" />
+    <Compile Include="Collections\Enumerables\MoveNext.cs" />
     <Compile Include="Collections\Enumerables\ContainsAll.cs" />
     <Compile Include="Collections\Enumerables\Contains.cs" />
     <Compile Include="Collections\Enumerables\ContainsNone.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Collections\Enumerables\IsNullOrEmpty.cs" />
     <Compile Include="Collections\Enumerables\SelectTryGet.cs" />
     <Compile Include="Exceptions\Arguments.cs" />
+    <Compile Include="Fluent\EnsureNot.cs" />
     <Compile Include="Interfaces\Disposables\IDisposableValueGeneric.cs" />
     <Compile Include="Interfaces\Disposables\IDisposableValue.cs" />
     <Compile Include="Disposables\ResourceManager.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Strings\Simplify.cs" />
     <Compile Include="Strings\AsMutable.cs" />
     <Compile Include="Strings\IsNullOr.cs" />
+    <Compile Include="System\FastActivator.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
