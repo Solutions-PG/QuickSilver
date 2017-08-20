@@ -17,7 +17,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
         /// </summary>
         /// <typeparam name="T">Type of the element of the <see cref="IEnumerable{T}"/></typeparam>
         /// <param name="source"><see cref="IEnumerable{T}"/> to verify</param>
-        /// <param name="predicate">Indiquate if the element meet criteria</param>
+        /// <param name="predicate">Indiquate if an element meet criteria</param>
         /// <returns>True if the source contains at least 2 elements corresponding to the predicate. Else, false.</returns>
         public static bool AtLeastTwo<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
@@ -51,7 +51,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
         /// <typeparam name="T">Type of the element of the <see cref="IEnumerable{T}"/></typeparam>
         /// <param name="source"><see cref="IEnumerable{T}"/> to verify</param>
         /// <param name="minimumCount">The smallest number of element expected to correspond to the predicate</param>
-        /// <param name="predicate">Indiquate if the element meet criteria</param>
+        /// <param name="predicate">Indiquate if an element meet criteria</param>
         /// <returns>True if the source contains at least the number of element expected to correspond to the predicate. Else, false.</returns>
         public static bool AtLeast<T>(this IEnumerable<T> source, int minimumCount, Func<T, bool> predicate)
         {

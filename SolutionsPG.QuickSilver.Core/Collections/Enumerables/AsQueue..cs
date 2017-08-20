@@ -17,6 +17,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         //bool Any(); //To prevent to lose the first item for this common scenario. Maybe just popit with the IEnumarator.Current... something like that
         //bool Any(Func<T, bool> predicate);
+        //int Position
         IQueuedEnumerable<T> Reset();
     }
 

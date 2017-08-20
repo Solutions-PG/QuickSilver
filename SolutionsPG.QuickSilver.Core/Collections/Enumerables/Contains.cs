@@ -9,56 +9,55 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool DoesNotContain<TItem, TObj>(this IEnumerable<TItem> enumerable, TObj objToVerify) where TObj : TItem
+        public static bool DoesNotContain<TItem>(this IEnumerable<TItem> source, TItem objToVerify)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            source.ThrowIfArgumentNull(nameof(source));
 
-            return enumerable.Contains_(objToVerify) == false;
+            return source.Contains_(objToVerify) == false;
         }
 
-        public static bool DoesNotContain<TItem>(this IEnumerable<TItem> enumerable, TItem objToVerify, IEqualityComparer<TItem> comparer)
+        public static bool DoesNotContain<TItem>(this IEnumerable<TItem> source, TItem objToVerify, IEqualityComparer<TItem> comparer)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            source.ThrowIfArgumentNull(nameof(source));
             comparer.ThrowIfArgumentNull(nameof(comparer));
 
-            return enumerable.Contains_(objToVerify, comparer) == false;
+            return source.Contains_(objToVerify, comparer) == false;
         }
 
-        public static bool DoesNotContain<TItem, TObj>(this IEnumerable<TItem> enumerable, TObj objToVerify, Func<TObj, TItem, bool> comparison)
+        public static bool DoesNotContain<TItem, TObj>(this IEnumerable<TItem> source, TObj objToVerify, Func<TObj, TItem, bool> comparison)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            source.ThrowIfArgumentNull(nameof(source));
             comparison.ThrowIfArgumentNull(nameof(comparison));
 
-            return enumerable.Contains_(objToVerify, comparison) == false;
+            return source.Contains_(objToVerify, comparison) == false;
         }
 
-        public static bool Contains<TItem, TObj>(this IEnumerable<TItem> enumerable, TObj objToVerify, Func<TObj, TItem, bool> comparison)
+        public static bool Contains<TItem, TObj>(this IEnumerable<TItem> source, TObj objToVerify, Func<TObj, TItem, bool> comparison)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            source.ThrowIfArgumentNull(nameof(source));
             comparison.ThrowIfArgumentNull(nameof(comparison));
 
-            return enumerable.Contains_(objToVerify, comparison);
+            return source.Contains_(objToVerify, comparison);
         }
 
         #endregion //Public methods
 
         #region " Private methods "
 
-        private static bool Contains_<TItem, TObj>(this IEnumerable<TItem> enumerable, TObj objToVerify) where TObj : TItem
+        private static bool Contains_<TItem>(this IEnumerable<TItem> source, TItem objToVerify)
         {
-            return enumerable.Contains(objToVerify);
+            return source.Contains(objToVerify);
         }
 
-        private static bool Contains_<TItem>(this IEnumerable<TItem> enumerable, TItem objToVerify, IEqualityComparer<TItem> comparer)
+        private static bool Contains_<TItem>(this IEnumerable<TItem> source, TItem objToVerify, IEqualityComparer<TItem> comparer)
         {
-            return enumerable.Contains(objToVerify, comparer);
+            return source.Contains(objToVerify, comparer);
         }
 
-        private static bool Contains_<TItem, TObj>(this IEnumerable<TItem> enumerable, TObj objToVerify, Func<TObj, TItem, bool> comparison)
+        private static bool Contains_<TItem, TObj>(this IEnumerable<TItem> source, TObj objToVerify, Func<TObj, TItem, bool> comparison)
         {
-            return enumerable.Any(EqualsToObject);
-
             bool EqualsToObject(TItem i) => comparison(objToVerify, i);
+            return source.Any(EqualsToObject);
         }
 
         #endregion //Private methods
