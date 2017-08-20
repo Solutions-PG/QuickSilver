@@ -30,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -58,6 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Async\AsyncExtensions\FromResultTests.cs" />
+    <Compile Include="Async\AsyncExtensions\AwaitSyncTests.cs" />
     <Compile Include="Collections\Dictionaries\AsReadOnlyTest.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegateTest.cs" />
     <Compile Include="Fluent\ApplyTests.cs" />
@@ -73,6 +76,10 @@
     <ProjectReference Include="..\SolutionsPG.QuickSilver.Core\SolutionsPG.QuickSilver.Core.csproj">
       <Project>{76A45FAA-4767-4BF0-9719-707EFEFD15BF}</Project>
       <Name>SolutionsPG.QuickSilver.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolutionsPG.QuickSilver.Test.Core\SolutionsPG.QuickSilver.Test.Core.csproj">
+      <Project>{3CFAAE8E-972D-46EE-8054-A26D062150D3}</Project>
+      <Name>SolutionsPG.QuickSilver.Test.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

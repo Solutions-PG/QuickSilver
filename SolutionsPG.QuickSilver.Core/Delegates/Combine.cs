@@ -3,7 +3,7 @@ using System;
 
 namespace SolutionsPG.QuickSilver.Core.Delegates
 {
-    public static class DelegateExtensions
+    public static partial class DelegateExtensions
     {
         #region " Public methods "
 

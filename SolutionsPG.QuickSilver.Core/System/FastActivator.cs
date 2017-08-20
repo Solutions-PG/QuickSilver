@@ -32,13 +32,13 @@ namespace SolutionsPG.QuickSilver.Core.System
             var ilGenerator = methodInfo.GetILGenerator();
 
             var constructorInfo = constructorDefinition.Constructor;
-            // Constructor for value types could be null
             if (constructorInfo != null)
             {
-                ilGenerator.Emit(OpCodes.Newobj, constructorDefinition.Constructor);
+                ilGenerator.Emit(OpCodes.Newobj, constructorInfo);
             }
             else
             {
+                // Constructor for value types could be null
                 var builder = ilGenerator.DeclareLocal(constructorType);
                 ilGenerator.Emit(OpCodes.Ldloca, builder);
                 ilGenerator.Emit(OpCodes.Initobj, constructorType);

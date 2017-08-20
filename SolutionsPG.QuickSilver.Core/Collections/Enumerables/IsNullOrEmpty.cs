@@ -14,7 +14,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
                 return true;
 
             using (var enumerator = enumerable.GetEnumerator())
-                return !enumerator.MoveNext_(predicate);
+                return !enumerator.MoveNextWhere_(predicate);
         }
 
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)

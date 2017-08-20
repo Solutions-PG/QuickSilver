@@ -9,19 +9,19 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        private static bool MoveNext<T>(this IEnumerator<T> enumerator, Func<T, bool> predicate)
+        private static bool MoveNextWhere<T>(this IEnumerator<T> enumerator, Func<T, bool> predicate)
         {
             enumerator.ThrowIfArgumentNull(nameof(enumerator));
             predicate.ThrowIfArgumentNull(nameof(predicate));
 
-            return enumerator.MoveNext_(predicate);
+            return enumerator.MoveNextWhere_(predicate);
         }
 
         #endregion //Public methods
 
         #region " Private methods "
 
-        private static bool MoveNext_<T>(this IEnumerator<T> enumerator, Func<T, bool> predicate)
+        private static bool MoveNextWhere_<T>(this IEnumerator<T> enumerator, Func<T, bool> predicate)
         {
             while (enumerator.MoveNext())
             {

@@ -18,7 +18,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             using (var enumerator = enumerable.GetEnumerator())
             {
-                return (enumerator.MoveNext_(predicate) && enumerator.MoveNext_(predicate));
+                return (enumerator.MoveNextWhere_(predicate) && enumerator.MoveNextWhere_(predicate));
             }
         }
 
@@ -40,7 +40,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             using (var enumerator = enumerable.GetEnumerator())
             {
-                while (enumerator.MoveNext_(predicate))
+                while (enumerator.MoveNextWhere_(predicate))
                 {
                     if (--minimumCount == 0)
                         return true;

@@ -16,7 +16,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             using (var enumerator = enumerable.GetEnumerator())
             {
-                return (!enumerator.MoveNext_(predicate) || !enumerator.MoveNext(predicate));
+                return (!enumerator.MoveNextWhere_(predicate) || !enumerator.MoveNextWhere(predicate));
             }
         }
 
@@ -38,10 +38,10 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             using (var enumerator = enumerable.GetEnumerator())
             {
-                while (enumerator.MoveNext_(predicate))
+                while (enumerator.MoveNextWhere_(predicate))
                 {
                     if (--maximumCount == 0)
-                        return !enumerator.MoveNext_(predicate);
+                        return !enumerator.MoveNextWhere_(predicate);
                 }
                 return true;
             }

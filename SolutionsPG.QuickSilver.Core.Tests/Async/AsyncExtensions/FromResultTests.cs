@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SolutionsPG.QuickSilver.Core.Async;
 
-namespace SolutionsPG.QuickSilver.Core.Tests.Async.AsyncExtensions
+namespace SolutionsPG.QuickSilver.Core.Tests.Async
 {
     [TestClass]
-    public class FromResultTests
+    public partial class AsyncExTests
     {
         #region " Tests management "
 
@@ -29,7 +30,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Async.AsyncExtensions
             //Arrange
 
             //Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => Core.Async.AsyncExtensions.FromResult((Func<int>) null),
+            Assert.ThrowsException<ArgumentNullException>(() => AsyncEx.FromResult((Func<int>)null),
                 "ArgumentNullException should have been thrown");
         }
 
@@ -45,7 +46,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Async.AsyncExtensions
             };
 
             //Act
-            Task<int> result = Core.Async.AsyncExtensions.FromResult(action);
+            Task<int> result = AsyncEx.FromResult(action);
 
             //Assert
             Assert.IsTrue(actionCalled, "The delegate should have been called");
@@ -66,7 +67,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Async.AsyncExtensions
             }
 
             //Act
-            int result = await Core.Async.AsyncExtensions.FromResult(FuncAction);
+            int result = await AsyncEx.FromResult(FuncAction);
 
             //Assert
             Assert.IsTrue(actionCalled, "The delegate should have been called");

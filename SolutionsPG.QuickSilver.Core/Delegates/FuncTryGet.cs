@@ -5,7 +5,7 @@ namespace SolutionsPG.QuickSilver.Core.Delegates
 {
     public delegate bool FuncTryGet<in T, TResult>(T obj, out TResult result);
 
-    public static class FuncTryGetExtensions
+    public static partial class DelegateExtensions
     {
         #region " Public methods "
 

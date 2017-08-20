@@ -10,13 +10,13 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
         /// <summary>
         /// A delegate to determine whether two objects of type T are equal.
         /// </summary>
-        Func<T, T, bool> _equalsFunc;
+        private readonly Func<T, T, bool> _equalsFunc;
 
         /// <summary>
         /// A delegate to serve as a hash function for the specified object for hashing algorithms and data structures,
         /// such as a hash table.
         /// </summary>
-        Func<T, int> _getHashCodeFunc;
+        private readonly Func<T, int> _getHashCodeFunc;
 
         #endregion //Variables
 

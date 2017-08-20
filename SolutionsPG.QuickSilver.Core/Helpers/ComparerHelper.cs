@@ -13,7 +13,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
         /// A delegate to perform a comparison of two objects of the same type and returns a value indicating whether
         /// one object is less than, equal to, or greater than the other.
         /// </summary>
-        Comparison<T> _compareFunc;
+        private readonly Comparison<T> _compareFunc;
 
         #endregion //Variables
 

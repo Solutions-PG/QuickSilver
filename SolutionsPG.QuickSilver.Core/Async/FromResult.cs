@@ -8,7 +8,7 @@ namespace SolutionsPG.QuickSilver.Core.Async
     /// <summary>
     /// Contains extensions related to async operations
     /// </summary>
-    public static class AsyncExtensions
+    public static partial class AsyncEx
     {
         #region " Public methods "
 
@@ -20,7 +20,7 @@ namespace SolutionsPG.QuickSilver.Core.Async
         /// <param name="action">Action to be executed</param>
         /// <exception cref="ArgumentNullException">Thrown when the parameter "action" is null</exception>
         /// <returns>A Task{T} containing the result or the exception</returns>
-        public static Task<T> FromResult<T>(Func<T> action)
+        public static Task<T> FromResult<T>(this Func<T> action)
         {
             action.ThrowIfArgumentNull(nameof(action));
 
