@@ -1,23 +1,42 @@
-﻿using System.Collections.Generic;
-
-using SolutionsPG.QuickSilver.Core.Delegates;
-using SolutionsPG.QuickSilver.Core.Exceptions;
-using System;
-using System.Collections;
-using System.IO;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+
+using SolutionsPG.QuickSilver.Core.Exceptions;
 
 namespace SolutionsPG.QuickSilver.Core.Collections
 {
+    /// <summary>
+    /// This is a specialized type of <see cref="IEnumerable{T}"/> meant to be used as a queue. Once an item is read, it
+    /// is poped from it. It enables scenario like doing something special with the first element, then do something
+    /// else with the rest without including a condition in the loop that will never be met again or having to skip the
+    /// element.
+    /// </summary>
+    /// <typeparam name="T">Type of the elements returned</typeparam>
     public interface IQueuedEnumerable<out T> : IEnumerable<T>
     {
+        //bool Any(); //To prevent to lose the first item for this common scenario. Maybe just popit with the IEnumarator.Current... something like that
+        //bool Any(Func<T, bool> predicate);
         IQueuedEnumerable<T> Reset();
     }
 
+    /// <summary>
+    /// With AsQueue, the user can compose its enumerable in new ways since computed element won't be computed again. 
+    /// </summary>
     public static partial class EnumerableExtensions
     {
-        #region " Public methods "
+        #region | Public methods |
 
+        /// <summary>
+        /// Allow the user to compose its enumerable in new ways since computed element won't be computed again.
+        /// It creates a specialized type of <see cref="IEnumerable{T}"/> meant to be used as a queue. Once an item is
+        /// read, it is poped from it. It enables scenario like doing something special with the first element, then do
+        /// something else with the rest without including a condition in the loop that will never be met again or
+        /// having to skip the element.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <returns></returns>
         public static IQueuedEnumerable<T> AsQueue<T>(this IEnumerable<T> enumerable)
         {
             return new QueueIterator<T>(enumerable.ThrowIfArgumentNull(nameof(enumerable)));
@@ -25,10 +44,12 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #endregion //Public methods
 
-        #region " Private methods "
+        #region | Private types |
 
-        #endregion //Private methods
-
+        /// <summary>
+        /// Implementation of <see cref="IQueuedEnumerable{T}"/>
+        /// </summary>
+        /// <typeparam name="T">Type of the elements returned</typeparam>
         private class QueueIterator<T> : IQueuedEnumerable<T>
         {
             #region " Const "
@@ -148,5 +169,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
             #endregion //Private methods
         }
+
+        #endregion //Private types
     }
 }
