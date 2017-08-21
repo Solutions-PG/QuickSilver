@@ -10,7 +10,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool ContainsAll<TItem, TObj>(this IEnumerable<TItem> enumerable, params TObj[] objToVerify) where TObj : TItem
+        public static bool ContainsAll<TItem>(this IEnumerable<TItem> enumerable, params TItem[] objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -18,7 +18,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAll_(objToVerify);
         }
 
-        public static bool ContainsAll<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify) where TObj : TItem
+        public static bool ContainsAll<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -32,16 +32,16 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             comparer.ThrowIfArgumentNull(nameof(comparer));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
 
-            return enumerable.ContainsAll_(objToVerify, comparer);
+            return enumerable.ContainsAll_(comparer, objToVerify);
         }
 
-        public static bool ContainsAll<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify, IEqualityComparer<TItem> comparer)
+        public static bool ContainsAll<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
             comparer.ThrowIfArgumentNull(nameof(comparer));
 
-            return enumerable.ContainsAll_(objToVerify, comparer);
+            return enumerable.ContainsAll_(comparer, objToVerify);
         }
 
         public static bool ContainsAll<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, params TObj[] objToVerify)
@@ -50,31 +50,31 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             comparison.ThrowIfArgumentNull(nameof(comparison));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
 
-            return enumerable.ContainsAll_(objToVerify, comparison);
+            return enumerable.ContainsAll_(comparison, objToVerify);
         }
 
-        public static bool ContainsAll<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison)
+        public static bool ContainsAll<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
             comparison.ThrowIfArgumentNull(nameof(comparison));
 
-            return enumerable.ContainsAll_(objToVerify, comparison);
+            return enumerable.ContainsAll_(comparison, objToVerify);
         }
 
         #endregion //Public methods
 
         #region " Private methods "
 
-        private static bool ContainsAll_<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify) where TObj : TItem
+        private static bool ContainsAll_<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify)
         {
             IEnumerable<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
             return objToVerify.All(EnumerableContainsObject);
 
-            bool EnumerableContainsObject(TObj o) => memoizedEnumerable.Contains(o);
+            bool EnumerableContainsObject(TItem o) => memoizedEnumerable.Contains(o);
         }
 
-        private static bool ContainsAll_<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify, IEqualityComparer<TItem> comparer)
+        private static bool ContainsAll_<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
         {
             ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
             return objToVerify.All(EnumerableContainsObject);
@@ -82,7 +82,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             bool EnumerableContainsObject(TItem o) => memoizedEnumerable.Contains(o, comparer);
         }
 
-        private static bool ContainsAll_<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison)
+        private static bool ContainsAll_<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
         {
             ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
             return objToVerify.All(EnumerableContainsObject);
