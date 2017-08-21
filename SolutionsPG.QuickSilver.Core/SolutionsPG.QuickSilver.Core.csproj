@@ -49,7 +49,7 @@
     <Compile Include="Async\FromResult.cs" />
     <Compile Include="Collections\Dictionaries\ToLookup.cs" />
     <Compile Include="Collections\Dictionaries\TryGetValueAsDelegate.cs" />
-    <Compile Include="Collections\Enumerables\MoveNext.cs" />
+    <Compile Include="Collections\Enumerables\MoveNextWhere.cs" />
     <Compile Include="Collections\Enumerables\ContainsAll.cs" />
     <Compile Include="Collections\Enumerables\Contains.cs" />
     <Compile Include="Collections\Enumerables\ContainsNone.cs" />

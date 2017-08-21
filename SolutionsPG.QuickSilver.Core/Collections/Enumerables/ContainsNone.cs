@@ -9,7 +9,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region " Public methods "
 
-        public static bool ContainsNone<TItem, TObj>(this IEnumerable<TItem> enumerable, params TObj[] objToVerify) where TObj : TItem
+        public static bool ContainsNone<TItem>(this IEnumerable<TItem> enumerable, params TItem[] objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -17,7 +17,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(objToVerify) == false;
         }
 
-        public static bool ContainsNone<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify) where TObj : TItem
+        public static bool ContainsNone<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -62,9 +62,5 @@ namespace SolutionsPG.QuickSilver.Core.Collections
         }
 
         #endregion //Public methods
-
-        #region " Private methods "
-
-        #endregion //Private methods
     }
 }
