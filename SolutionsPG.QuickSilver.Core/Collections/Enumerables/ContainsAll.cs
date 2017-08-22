@@ -69,29 +69,29 @@ namespace SolutionsPG.QuickSilver.Core.Collections
         private static bool ContainsAll_<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify)
         {
             IEnumerable<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
-            return objToVerify.All(EnumerableContainsObject);
 
             bool EnumerableContainsObject(TItem o) => memoizedEnumerable.Contains(o);
+            return objToVerify.All(EnumerableContainsObject);
         }
 
         private static bool ContainsAll_<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
         {
             ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
-            return objToVerify.All(EnumerableContainsObject);
 
             bool EnumerableContainsObject(TItem o) => memoizedEnumerable.Contains(o, comparer);
+            return objToVerify.All(EnumerableContainsObject);
         }
 
         private static bool ContainsAll_<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
         {
             ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
-            return objToVerify.All(EnumerableContainsObject);
 
             bool EnumerableContainsObject(TObj o)
             {
                 return memoizedEnumerable.Any(Compare);
                 bool Compare(TItem i) => comparison(o, i);
             }
+            return objToVerify.All(EnumerableContainsObject);
         }
 
         #endregion //Private methods

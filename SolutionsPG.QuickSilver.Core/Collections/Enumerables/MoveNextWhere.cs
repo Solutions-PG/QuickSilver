@@ -7,9 +7,9 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 {
     public static partial class EnumerableExtensions
     {
-        #region " Public methods "
+        #region | Public methods |
 
-        private static bool MoveNextWhere<T>(this IEnumerator<T> enumerator, Func<T, bool> predicate)
+        public static bool MoveNextWhere<T>(this IEnumerator<T> enumerator, Func<T, bool> predicate)
         {
             enumerator.ThrowIfArgumentNull(nameof(enumerator));
             predicate.ThrowIfArgumentNull(nameof(predicate));
@@ -19,7 +19,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #endregion //Public methods
 
-        #region " Private methods "
+        #region | Private methods |
 
         private static bool MoveNextWhere_<T>(this IEnumerator<T> enumerator, Func<T, bool> predicate)
         {

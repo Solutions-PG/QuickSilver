@@ -32,16 +32,16 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             comparer.ThrowIfArgumentNull(nameof(comparer));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
 
-            return enumerable.ContainsAny_(objToVerify, comparer);
+            return enumerable.ContainsAny_(comparer, objToVerify);
         }
 
-        public static bool ContainsAny<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify, IEqualityComparer<TItem> comparer)
+        public static bool ContainsAny<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
             comparer.ThrowIfArgumentNull(nameof(comparer));
 
-            return enumerable.ContainsAny_(objToVerify, comparer);
+            return enumerable.ContainsAny_(comparer, objToVerify);
         }
 
         public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, params TObj[] objToVerify)
@@ -50,16 +50,16 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             comparison.ThrowIfArgumentNull(nameof(comparison));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
 
-            return enumerable.ContainsAny_(objToVerify, comparison);
+            return enumerable.ContainsAny_(comparison, objToVerify);
         }
 
-        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison)
+        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
             comparison.ThrowIfArgumentNull(nameof(comparison));
 
-            return enumerable.ContainsAny_(objToVerify, comparison);
+            return enumerable.ContainsAny_(comparison, objToVerify);
         }
 
         #endregion //Public methods
@@ -74,7 +74,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return objToVerify.Any(EnumerableContainsObject);
         }
 
-        private static bool ContainsAny_<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify, IEqualityComparer<TItem> comparer)
+        private static bool ContainsAny_<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
         {
             ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
 
@@ -82,7 +82,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return objToVerify.Any(EnumerableContainsObject);
         }
 
-        private static bool ContainsAny_<TItem, TObj>(this IEnumerable<TItem> enumerable, IEnumerable<TObj> objToVerify, Func<TObj, TItem, bool> comparison)
+        private static bool ContainsAny_<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
         {
             ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
             

@@ -6,7 +6,7 @@ using SolutionsPG.QuickSilver.Core.Async;
 namespace SolutionsPG.QuickSilver.Core.Tests.Async
 {
     [TestClass]
-    public partial class AsyncExTests
+    public class FromResultTests
     {
         #region " Tests management "
 
@@ -24,7 +24,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Async
 
         #region " FromResult "
 
-        [TestMethod, TestCategory("Core.Async"), TestCategory("_Unit")]
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Async"), TestCategory("Core.Async.FromResult")]
         public void AsyncExtensions_FromResult_ActionNull_ReturnArgumentNullExceptionThrown()
         {
             //Arrange
@@ -34,7 +34,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Async
                 "ArgumentNullException should have been thrown");
         }
 
-        [TestMethod, TestCategory("Core.Async"), TestCategory("_Unit")]
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Async"), TestCategory("Core.Async.FromResult")]
         public async Task AsyncExtensions_FromResult_ActionValid_ReturnTaskContainingException()
         {
             //Arrange
@@ -53,7 +53,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Async
             await Assert.ThrowsExceptionAsync<NotSupportedException>(async () => await result, "NotSupportedException should have been thrown");
         }
 
-        [TestMethod, TestCategory("Core.Async"), TestCategory("_Unit")]
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Async"), TestCategory("Core.Async.FromResult")]
         public async Task AsyncExtensions_FromResult_ActionValid_ReturnTaskContainingValue()
         {
             //Arrange

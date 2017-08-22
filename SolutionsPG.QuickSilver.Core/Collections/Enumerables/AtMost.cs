@@ -87,7 +87,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
         {
             using (var enumerator = source.GetEnumerator())
             {
-                return (!enumerator.MoveNextWhere_(predicate) || !enumerator.MoveNextWhere(predicate));
+                return (!enumerator.MoveNextWhere_(predicate) || !enumerator.MoveNextWhere_(predicate));
             }
         }
 

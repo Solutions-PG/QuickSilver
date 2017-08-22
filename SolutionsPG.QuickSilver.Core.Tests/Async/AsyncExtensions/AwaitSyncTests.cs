@@ -12,7 +12,7 @@ using SolutionsPG.QuickSilver.Test.Core;
 namespace SolutionsPG.QuickSilver.Core.Async.Tests
 {
     [TestClass()]
-    public partial class AsyncExTests
+    public class AwaitSyncTests
     {
         #region " void AwaitSync(this Func<Task> action) "
 

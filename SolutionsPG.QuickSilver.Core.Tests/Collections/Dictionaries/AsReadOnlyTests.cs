@@ -8,9 +8,9 @@ using SolutionsPG.QuickSilver.Core.Collections;
 namespace SolutionsPG.QuickSilver.Core.Tests.Collections.Dictionaries
 {
     [TestClass]
-    public class AsReadOnlyTest
+    public class AsReadOnlyTests
     {
-        #region " Tests management "
+        #region | Tests management |
 
         [TestInitialize]
         public void Initialize()
@@ -24,9 +24,9 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Collections.Dictionaries
 
         #endregion //Tests management
 
-        #region " AsReadOnly "
-
-        [TestMethod, TestCategory("Core.Collections.Dictionaries"), TestCategory("_Unit")]
+        #region | AsReadOnly |
+        
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Collections.Dictionaries"), TestCategory("Core.Collections.Dictionaries.AsReadOnly")]
         public void DictionaryExtensions_AsReadOnly_DictionaryNull_ReturnArgumentNullExceptionThrown()
         {
             //Arrange
@@ -36,7 +36,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Collections.Dictionaries
                 "ArgumentNullException should have been thrown");
         }
 
-        [TestMethod, TestCategory("Core.Collections.Dictionaries"), TestCategory("_Unit")]
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Collections.Dictionaries"), TestCategory("Core.Collections.Dictionaries.AsReadOnly")]
         public void DictionaryExtensions_AsReadOnly_DictionaryValid_VerifyCallerUnmodified()
         {
             //Arrange
@@ -54,7 +54,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Collections.Dictionaries
             Assert.AreEqual(referenceDict["key"], testDict["key"], "The original dictionary should have the same keys and values before and after the call to AsReadOnly");
         }
 
-        [TestMethod, TestCategory("Core.Collections.Dictionaries"), TestCategory("_Unit")]
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Collections.Dictionaries"), TestCategory("Core.Collections.Dictionaries.AsReadOnly")]
         public void DictionaryExtensions_AsReadOnly_DictionaryValid_ReturnReadOnlyDictionaryWithSameValue()
         {
             //Arrange

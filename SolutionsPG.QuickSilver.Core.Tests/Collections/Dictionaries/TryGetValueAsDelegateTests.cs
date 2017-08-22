@@ -7,9 +7,9 @@ using SolutionsPG.QuickSilver.Core.Collections;
 namespace SolutionsPG.QuickSilver.Core.Tests.Collections.Dictionaries
 {
     [TestClass]
-    public class TryGetValueAsDelegateTest
+    public class TryGetValueAsDelegateTests
     {
-        #region " Tests management "
+        #region | Tests management #
 
         [TestInitialize]
         public void Initialize()
@@ -23,9 +23,9 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Collections.Dictionaries
 
         #endregion //Tests management
 
-        #region " TryGetValueAsDelegate "
-
-        [TestMethod, TestCategory("Core.Collections.Dictionaries"), TestCategory("_Unit")]
+        #region | TryGetValueAsDelegate |
+        
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Collections.Dictionaries"), TestCategory("Core.Collections.Dictionaries.TryGetValueAsDelegate")]
         public void DictionaryExtensions_TryGetValueAsDelegate_DictionaryNull_ReturnArgumentNullExceptionThrown()
         {
             //Arrange
@@ -35,7 +35,7 @@ namespace SolutionsPG.QuickSilver.Core.Tests.Collections.Dictionaries
                 "ArgumentNullException should have been thrown");
         }
 
-        [TestMethod, TestCategory("Core.Collections.Dictionaries"), TestCategory("_Unit")]
+        [TestMethod, TestCategory("_Unit"), TestCategory("Core.Collections.Dictionaries"), TestCategory("Core.Collections.Dictionaries.TryGetValueAsDelegate")]
         public void DictionaryExtensions_TryGetValueAsDelegate_DictionaryValid_ReturnDelegate()
         {
             //Arrange
