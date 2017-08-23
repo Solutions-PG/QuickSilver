@@ -10,7 +10,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     /// </summary>
     public static partial class DictionaryExtensions
     {
-        #region " Public methods "
+        #region | Public methods |
 
         /// <summary>
         /// Take a dictionary and reverse it, source values become result keys and vice versa, except the result values
@@ -198,7 +198,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #endregion //Public methods
 
-        #region " Private methods "
+        #region | Private methods |
 
         private static IReadOnlyDictionary<TResultKey, IReadOnlyList<TResultValue>> ToLookupTable_<TSourceKey, TSourceValue, TResultKey, TResultValue>(this IReadOnlyDictionary<TSourceKey, IReadOnlyList<TSourceValue>> dictionary, Func<TSourceValue, TResultKey> keySelector, Func<TSourceKey, TResultValue> valueSelector)
         {
