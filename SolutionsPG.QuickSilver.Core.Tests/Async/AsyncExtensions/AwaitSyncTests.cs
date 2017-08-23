@@ -1,15 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SolutionsPG.QuickSilver.Core.Async;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System;
 using System.Threading.Tasks;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using SolutionsPG.QuickSilver.Core.Async;
 using SolutionsPG.QuickSilver.Core.System;
 using SolutionsPG.QuickSilver.Test.Core;
 
-namespace SolutionsPG.QuickSilver.Core.Async.Tests
+namespace SolutionsPG.QuickSilver.Core.Tests.Async
 {
     [TestClass()]
     public class AwaitSyncTests
