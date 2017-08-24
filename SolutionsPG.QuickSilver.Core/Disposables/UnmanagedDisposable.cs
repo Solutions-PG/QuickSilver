@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SolutionsPG.QuickSilver.Core.Disposables
 {
     public abstract class UnmanagedDisposable : IDisposable
     {
-        #region " Variables "
+        #region | Variables |
 
         /// <summary>
         /// To detect redundant calls
@@ -14,7 +13,7 @@ namespace SolutionsPG.QuickSilver.Core.Disposables
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
 
         protected UnmanagedDisposable()
         {
@@ -23,13 +22,13 @@ namespace SolutionsPG.QuickSilver.Core.Disposables
 
         #endregion //Constructors
 
-        #region " Finalizer "
+        #region | Finalizer |
 
         ~UnmanagedDisposable() => this.Dispose(false);
 
-        #endregion //Constructors
+        #endregion //Finalizer
 
-        #region " Public methods "
+        #region | Public methods |
 
         void IDisposable.Dispose()
         {
@@ -39,7 +38,7 @@ namespace SolutionsPG.QuickSilver.Core.Disposables
 
         #endregion //Public methods
 
-        #region " Protected methods "
+        #region | Protected methods |
 
         /// <summary>
         /// 
@@ -52,7 +51,7 @@ namespace SolutionsPG.QuickSilver.Core.Disposables
 
         #endregion //Protected methods
 
-        #region " Private methods "
+        #region | Private methods |
 
         private void Dispose(bool disposing)
         {

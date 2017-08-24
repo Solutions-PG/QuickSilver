@@ -5,7 +5,7 @@ using SolutionsPG.QuickSilver.Core.Exceptions;
 
 namespace SolutionsPG.QuickSilver.Core.Helpers
 {
-    public sealed class UnmanagedDisposableValueHelper<T> : UnmanagedDisposableValue<T>
+    public sealed class UnmanagedDisposableHelper<T> : UnmanagedDisposable<T>
     {
         #region | Variables |
 
@@ -14,8 +14,8 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
         #endregion //Variables
 
         #region | Constructors |
-        
-        public UnmanagedDisposableValueHelper(T value, Action<bool, T> dispose) : base(value)
+
+        public UnmanagedDisposableHelper(T value, Action<bool, T> dispose) : base(value)
         {
             _disposeFunc = dispose.ThrowIfArgumentNull(nameof(dispose));
         }

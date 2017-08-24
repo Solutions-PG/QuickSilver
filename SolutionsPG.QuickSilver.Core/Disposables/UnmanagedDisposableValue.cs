@@ -1,43 +1,26 @@
 ﻿using SolutionsPG.QuickSilver.Core.Helpers;
 using System;
 using System.Collections.Generic;
+using SolutionsPG.QuickSilver.Core.Interfaces.Disposables;
 
 namespace SolutionsPG.QuickSilver.Core.Disposables
 {
 
-    public abstract class UnmanagedDisposableValue<T> : IDisposable
+    public abstract class UnmanagedDisposableValue<T> : UnmanagedDisposable<T>, IDisposableValue<T>, IDisposableValue
     {
-        #region " Variables "
+        #region | Variables |
 
-        IDisposable _disposableHelper;
-        T Value { get; }
+        public new T Value => base.Value;
+        object IDisposableValue.Value => this.Value;
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
 
-        protected UnmanagedDisposableValue(T value)
+        protected UnmanagedDisposableValue(T value) : base(value)
         {
-            _disposableHelper = new UnmanagedDisposableHelper(Dispose_);
-
-            void Dispose_(bool diposing) => this.DisposeImpl(diposing, this.Value);
         }
 
         #endregion //Constructors
-
-        #region " Public methods "
-
-        void IDisposable.Dispose()
-        {
-            _disposableHelper.Dispose();
-        }
-
-        #endregion //Public methods
-
-        #region " Protected methods "
-
-        protected abstract void DisposeImpl(bool diposing, T value);
-
-        #endregion //Protected methods
     }
 }

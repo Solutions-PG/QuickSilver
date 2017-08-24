@@ -5,17 +5,17 @@ using SolutionsPG.QuickSilver.Core.Exceptions;
 
 namespace SolutionsPG.QuickSilver.Core.Helpers
 {
-    public sealed class UnmanagedDisposableValueHelper<T> : UnmanagedDisposableValue<T>
+    public sealed class DisposableHelper<T> : Disposable<T>
     {
         #region | Variables |
 
-        private readonly Action<bool, T> _disposeFunc;
+        private readonly Action<T> _disposeFunc;
 
         #endregion //Variables
 
         #region | Constructors |
-        
-        public UnmanagedDisposableValueHelper(T value, Action<bool, T> dispose) : base(value)
+
+        public DisposableHelper(T value, Action<T> dispose) : base(value)
         {
             _disposeFunc = dispose.ThrowIfArgumentNull(nameof(dispose));
         }
@@ -24,7 +24,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 
         #region | Protected methods |
 
-        protected override void DisposeImpl(bool disposing, T value) => _disposeFunc(disposing, value);
+        protected override void DisposeImpl(T value) => _disposeFunc(value);
 
         #endregion //Protected methods
     }

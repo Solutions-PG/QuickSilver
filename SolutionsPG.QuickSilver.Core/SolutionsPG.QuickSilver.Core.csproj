@@ -61,6 +61,11 @@
     <Compile Include="Collections\Enumerables\TryGetElementAt.cs" />
     <Compile Include="Delegates\Combine.cs" />
     <Compile Include="Delegates\FuncTryGet.cs" />
+    <Compile Include="Disposables\DisposableGeneric.cs" />
+    <Compile Include="Helpers\DisposableGenericHelper.cs" />
+    <Compile Include="Helpers\ScopeableGeneric.cs" />
+    <Compile Include="Helpers\Scopeable.cs" />
+    <Compile Include="Disposables\UnmanagedDisposableGeneric.cs" />
     <Compile Include="Disposables\UnmanagedDisposable.cs" />
     <Compile Include="Disposables\TryLock.cs" />
     <Compile Include="Collections\Dictionaries\AsReadOnly.cs" />
@@ -72,6 +77,7 @@
     <Compile Include="Collections\Enumerables\SelectTryGet.cs" />
     <Compile Include="Exceptions\Arguments.cs" />
     <Compile Include="Fluent\EnsureNot.cs" />
+    <Compile Include="Helpers\UnmanagedDisposableGenericHelper.cs" />
     <Compile Include="Interfaces\Disposables\IDisposableValueGeneric.cs" />
     <Compile Include="Interfaces\Disposables\IDisposableValue.cs" />
     <Compile Include="Disposables\ResourceManager.cs" />

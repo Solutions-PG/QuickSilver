@@ -5,7 +5,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 {
     public sealed class EqualityComparerHelper<T> : EqualityComparer<T>
     {
-        #region " Variables "
+        #region | Variables |
 
         /// <summary>
         /// A delegate to determine whether two objects of type T are equal.
@@ -20,7 +20,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
 
         /// <summary>
         /// Initializes a new instance.
@@ -38,7 +38,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 
         #endregion //Constructors
 
-        #region " Public methods "
+        #region | Public methods |
 
         /// <summary>
         /// Determines whether two objects of type T are equal.

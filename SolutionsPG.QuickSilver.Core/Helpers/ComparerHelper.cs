@@ -7,7 +7,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 {
     public sealed class ComparerHelper<T> : Comparer<T>
     {
-        #region " Variables "
+        #region | Variables |
 
         /// <summary>
         /// A delegate to perform a comparison of two objects of the same type and returns a value indicating whether
@@ -17,7 +17,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
 
         /// <summary>
         /// Initializes a new instance
@@ -33,7 +33,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 
         #endregion //Constructors
 
-        #region " Public methods "
+        #region | Public methods |
 
         /// <summary>
         /// Performs a comparison of two objects of the same type and returns a value indicating whether one object is

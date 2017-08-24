@@ -1,20 +1,18 @@
-﻿using SolutionsPG.QuickSilver.Core.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Threading;
 
 namespace SolutionsPG.QuickSilver.Core.Disposables
 {
 
-    public class TryLock : ResourceManager<bool>
+    public class TryLock : ResourceManager<object, bool>
     {
-        #region " Variables "
+        #region | Variables |
 
-        object _target;
+        private readonly object _target;
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
 
         public TryLock(object target)
         {
@@ -23,13 +21,13 @@ namespace SolutionsPG.QuickSilver.Core.Disposables
 
         #endregion //Constructors
 
-        #region " Public methods "
+        #region | Public methods |
 
         #endregion //Public methods
 
-        #region " Protected methods "
+        #region | Protected methods |
 
-        protected override bool AcquireImpl()
+        protected override bool AcquireImpl(object obj)
         {
             bool hasLocked = Monitor.TryEnter(_target, TimeSpan.FromSeconds(10));
             if (!hasLocked) throw new Exception();

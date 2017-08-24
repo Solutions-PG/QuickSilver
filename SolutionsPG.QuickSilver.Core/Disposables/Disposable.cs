@@ -1,42 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SolutionsPG.QuickSilver.Core.Disposables
 {
     public abstract class Disposable : IDisposable
     {
-        #region " Variables "
+        #region | Variables |
 
         /// <summary>
         /// To detect redundant calls
         /// </summary>
-        private bool _disposedValue = false;
+        protected bool Disposed {get; private set;}
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
 
         protected Disposable()
         {
-
+            Disposed = false;
         }
 
         #endregion //Constructors
 
-        #region " Public methods "
+        #region | Public methods |
 
         void IDisposable.Dispose()
         {
-            if (!_disposedValue)
+            if (this.Disposed == false)
             {
                 this.DisposeImpl();
-                _disposedValue = true;
+                this.Disposed = true;
             }
         }
 
         #endregion //Public methods
 
-        #region " Protected methods "
+        #region | Protected methods |
 
         protected abstract void DisposeImpl();
 

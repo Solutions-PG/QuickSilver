@@ -7,13 +7,13 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 {
     public sealed class UnmanagedDisposableHelper : UnmanagedDisposable
     {
-        #region " Variables "
+        #region | Variables |
 
-        Action<bool> _disposeFunc;
+        private readonly Action<bool> _disposeFunc;
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
         
         public UnmanagedDisposableHelper(Action<bool> dispose) : base()
         {
@@ -22,7 +22,7 @@ namespace SolutionsPG.QuickSilver.Core.Helpers
 
         #endregion //Constructors
 
-        #region " Public methods "
+        #region | Public methods |
 
         protected override void DisposeImpl(bool disposing) => _disposeFunc.ThrowIfNull(_ => new NotImplementedException()).Invoke(disposing);
 

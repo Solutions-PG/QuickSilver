@@ -1,17 +1,15 @@
 ﻿using SolutionsPG.QuickSilver.Core.Helpers;
-using System;
-using System.Collections.Generic;
 
 namespace SolutionsPG.QuickSilver.Core.Disposables
 {
 
-    public abstract class ResourceManager<T>
+    public abstract class ResourceManager<T, TResult>
     {
-        #region " Variables "
+        #region | Variables |
 
         #endregion //Variables
 
-        #region " Constructors "
+        #region | Constructors |
 
         protected ResourceManager()
         {
@@ -19,19 +17,19 @@ namespace SolutionsPG.QuickSilver.Core.Disposables
 
         #endregion //Constructors
 
-        #region " Public methods "
+        #region | Public methods |
 
-        public DisposableValue<T> Acquire()
+        public DisposableValue<TResult> Acquire(T obj)
         {
-            return new DisposableValueHelper<T>(this.AcquireImpl(), this.ReleaseImpl);
+            return new DisposableValueHelper<TResult>(this.AcquireImpl(obj), this.ReleaseImpl);
         }
 
         #endregion //Public methods
 
-        #region " Protected methods "
+        #region | Protected methods |
 
-        protected abstract T AcquireImpl();
-        protected abstract void ReleaseImpl(T value);
+        protected abstract TResult AcquireImpl(T obj);
+        protected abstract void ReleaseImpl(TResult value);
 
         #endregion //Protected methods
     }

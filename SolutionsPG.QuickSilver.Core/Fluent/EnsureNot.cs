@@ -7,9 +7,10 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
 {
     public static partial class ObjectExtensions
     {
-        #region " Public methods "
+        #region | Public methods |
 
         public static T EnsureNotNull<T>(this T obj) where T : new() => obj.EnsureNot_(obj == null, () => FastActivator<T>.CreateInstance());
+
         public static TObj EnsureNotNull<TObj, TRepl>(this TObj obj, Func<TRepl> getReplacement) where TRepl : TObj
         {
             getReplacement.ThrowIfArgumentNull(nameof(getReplacement));
@@ -46,7 +47,7 @@ namespace SolutionsPG.QuickSilver.Core.Fluent
 
         #endregion //Public methods
 
-        #region " Private methods "
+        #region | Private methods |
 
         private static TObj EnsureNot_<TObj, TRepl>(this TObj obj, bool condition, Func<TRepl> getReplacement)
             where TRepl : TObj => (condition) ? getReplacement() : obj;
