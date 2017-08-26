@@ -7,6 +7,22 @@ namespace SolutionsPG.QuickSilver.Core.Exceptions
         #region " Public methods "
 
         /// <summary>
+        /// Take an object and throw an exception created from it if the condition is met.
+        /// </summary>
+        /// <typeparam name="T">Type of the object</typeparam>
+        /// <typeparam name="TException">Type of the exception to throw if the condition is met</typeparam>
+        /// <param name="obj">Object to create the exception with</param>
+        /// <param name="otherObj">Another object used for comparison with the original object</param>
+        /// <param name="createException">Action creating the exception to throw</param>
+        /// <returns>The caller if the condition hasn't been met. Else an exception of type TException is thrown</returns>
+        public static T ThrowIfEquals<T, TException>(this T obj, T otherObj, Func<T, TException> createException) where TException : Exception
+        {
+            createException.ThrowIfArgumentNull_(nameof(createException));
+
+            return obj.ThrowIf_(obj.Is(otherObj), createException);
+        }
+
+        /// <summary>
         /// Take an object and throw an exception created from it if the condition is met. Useful in fluent scenario.
         /// </summary>
         /// <typeparam name="T">Type of the object</typeparam>

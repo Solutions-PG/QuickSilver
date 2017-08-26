@@ -37,6 +37,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,9 +62,27 @@
     <Compile Include="Collections\Enumerables\AsQueue..cs" />
     <Compile Include="Collections\Enumerables\Memoize.cs" />
     <Compile Include="Collections\Enumerables\TryGetElementAt.cs" />
+    <Compile Include="Core\IsDefault.cs" />
+    <Compile Include="Core\IsNot.cs" />
+    <Compile Include="Core\Is.cs" />
+    <Compile Include="Core\TypeCache.cs" />
     <Compile Include="Delegates\Combine.cs" />
     <Compile Include="Delegates\FuncTryGet.cs" />
     <Compile Include="Disposables\DisposableGeneric.cs" />
+    <Compile Include="Exceptions\Entities\ExceptionMessageBuilderFacade.cs" />
+    <Compile Include="Exceptions\Interfaces\IExceptionMessageBuilderFacade.cs" />
+    <Compile Include="Exceptions\ThrowIfDefault.cs" />
+    <Compile Include="Exceptions\ThrowIfNotEquals.cs" />
+    <Compile Include="Exceptions\ThrowIfNot.cs" />
+    <Compile Include="Exceptions\ThrowIfEquals.cs" />
+    <Compile Include="Exceptions\ThrowIfNotNull.cs" />
+    <Compile Include="Exceptions\ThrowIfNull.cs" />
+    <Compile Include="Exceptions\ThrowIf.cs" />
+    <Compile Include="Exceptions\Throw.cs" />
+    <Compile Include="Exceptions\Entities\ExceptionMessageBuilder.cs" />
+    <Compile Include="Exceptions\Entities\ExceptionWithSource.cs" />
+    <Compile Include="Exceptions\Interfaces\IExceptionMessageBuilder.cs" />
+    <Compile Include="Exceptions\Entities\InternalThrowException.cs" />
     <Compile Include="Helpers\DisposableGenericHelper.cs" />
     <Compile Include="Helpers\ScopeableGeneric.cs" />
     <Compile Include="Helpers\Scopeable.cs" />
