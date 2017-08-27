@@ -69,6 +69,7 @@
     <Compile Include="Exceptions\ThrowTests.cs" />
     <Compile Include="Fluent\TransformTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\FastActivatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SolutionsPG.QuickSilver.Core\SolutionsPG.QuickSilver.Core.csproj">
