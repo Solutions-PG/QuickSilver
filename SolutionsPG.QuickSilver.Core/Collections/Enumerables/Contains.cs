@@ -7,16 +7,16 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 {
     public static partial class EnumerableExtensions
     {
-        #region " Public methods "
+        #region | Public methods |
 
-        public static bool DoesNotContain<TItem>(this IEnumerable<TItem> source, TItem objToVerify)
+        public static bool DoesNotContain<T>(this IEnumerable<T> source, T objToVerify)
         {
             source.ThrowIfArgumentNull(nameof(source));
 
             return source.Contains_(objToVerify) == false;
         }
 
-        public static bool DoesNotContain<TItem>(this IEnumerable<TItem> source, TItem objToVerify, IEqualityComparer<TItem> comparer)
+        public static bool DoesNotContain<T>(this IEnumerable<T> source, T objToVerify, IEqualityComparer<T> comparer)
         {
             source.ThrowIfArgumentNull(nameof(source));
             comparer.ThrowIfArgumentNull(nameof(comparer));
@@ -24,7 +24,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return source.Contains_(objToVerify, comparer) == false;
         }
 
-        public static bool DoesNotContain<TItem, TObj>(this IEnumerable<TItem> source, TObj objToVerify, Func<TObj, TItem, bool> comparison)
+        public static bool DoesNotContain<TSource, TObj>(this IEnumerable<TSource> source, TObj objToVerify, Func<TSource, TObj, bool> comparison)
         {
             source.ThrowIfArgumentNull(nameof(source));
             comparison.ThrowIfArgumentNull(nameof(comparison));
@@ -32,7 +32,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return source.Contains_(objToVerify, comparison) == false;
         }
 
-        public static bool Contains<TItem, TObj>(this IEnumerable<TItem> source, TObj objToVerify, Func<TObj, TItem, bool> comparison)
+        public static bool Contains<TSource, TObj>(this IEnumerable<TSource> source, TObj objToVerify, Func<TSource, TObj, bool> comparison)
         {
             source.ThrowIfArgumentNull(nameof(source));
             comparison.ThrowIfArgumentNull(nameof(comparison));
@@ -42,22 +42,22 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #endregion //Public methods
 
-        #region " Private methods "
+        #region | Private methods |
 
-        private static bool Contains_<TItem>(this IEnumerable<TItem> source, TItem objToVerify)
+        private static bool Contains_<T>(this IEnumerable<T> source, T objToVerify)
         {
             return source.Contains(objToVerify);
         }
 
-        private static bool Contains_<TItem>(this IEnumerable<TItem> source, TItem objToVerify, IEqualityComparer<TItem> comparer)
+        private static bool Contains_<T>(this IEnumerable<T> source, T objToVerify, IEqualityComparer<T> comparer)
         {
             return source.Contains(objToVerify, comparer);
         }
 
-        private static bool Contains_<TItem, TObj>(this IEnumerable<TItem> source, TObj objToVerify, Func<TObj, TItem, bool> comparison)
+        private static bool Contains_<TSource, TObj>(this IEnumerable<TSource> source, TObj objToVerify, Func<TSource, TObj, bool> areEquivalent)
         {
-            bool EqualsToObject(TItem i) => comparison(objToVerify, i);
-            return source.Any(EqualsToObject);
+            bool AreEqual(TSource s) => areEquivalent(s, objToVerify);
+            return source.Any(AreEqual);
         }
 
         #endregion //Private methods

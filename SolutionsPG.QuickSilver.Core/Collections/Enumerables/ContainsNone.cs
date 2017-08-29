@@ -7,9 +7,9 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 {
     public static partial class EnumerableExtensions
     {
-        #region " Public methods "
+        #region | Public methods |
 
-        public static bool ContainsNone<TItem>(this IEnumerable<TItem> enumerable, params TItem[] objToVerify)
+        public static bool ContainsNone<T>(this IEnumerable<T> enumerable, params T[] objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -17,7 +17,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(objToVerify) == false;
         }
 
-        public static bool ContainsNone<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify)
+        public static bool ContainsNone<T>(this IEnumerable<T> enumerable, IEnumerable<T> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -25,7 +25,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(objToVerify) == false;
         }
 
-        public static bool ContainsNone<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, params TItem[] objToVerify)
+        public static bool ContainsNone<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> comparer, params T[] objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             comparer.ThrowIfArgumentNull(nameof(comparer));
@@ -34,7 +34,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(comparer, objToVerify) == false;
         }
 
-        public static bool ContainsNone<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
+        public static bool ContainsNone<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> comparer, IEnumerable<T> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
@@ -43,7 +43,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(comparer, objToVerify) == false;
         }
 
-        public static bool ContainsNone<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, params TObj[] objToVerify)
+        public static bool ContainsNone<TSource, TObj>(this IEnumerable<TSource> enumerable, Func<TSource, TObj, bool> comparison, params TObj[] objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             comparison.ThrowIfArgumentNull(nameof(comparison));
@@ -52,7 +52,7 @@ namespace SolutionsPG.QuickSilver.Core.Collections
             return enumerable.ContainsAny_(comparison, objToVerify) == false;
         }
 
-        public static bool ContainsNone<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
+        public static bool ContainsNone<TSource, TObj>(this IEnumerable<TSource> enumerable, Func<TSource, TObj, bool> comparison, IEnumerable<TObj> objToVerify)
         {
             enumerable.ThrowIfArgumentNull(nameof(enumerable));
             objToVerify.ThrowIfArgumentNull(nameof(objToVerify));

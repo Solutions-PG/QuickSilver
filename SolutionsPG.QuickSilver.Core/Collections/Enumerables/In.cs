@@ -11,170 +11,170 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #region | In |
 
-        public static bool In<T>(this T obj, params T[] enumerable)
+        public static bool In<T>(this T obj, params T[] others)
         {
-            return obj.In_(enumerable.ThrowIfArgumentNull(nameof(enumerable)));
+            return obj.In_(others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool In<T>(this T obj, IEnumerable<T> enumerable)
+        public static bool In<T>(this T obj, IEnumerable<T> others)
         {
-            return obj.In_(enumerable.ThrowIfArgumentNull(nameof(enumerable)));
+            return obj.In_(others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool In<T>(this T obj, IEqualityComparer<T> comparer, params T[] enumerable)
+        public static bool In<T>(this T obj, IEqualityComparer<T> comparer, params T[] others)
         {
-            return obj.In_(comparer, enumerable.ThrowIfArgumentNull(nameof(enumerable)));
+            return obj.In_(comparer, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool In<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<T> enumerable)
+        public static bool In<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<T> others)
         {
-            return obj.In_(comparer, enumerable.ThrowIfArgumentNull(nameof(enumerable)));
+            return obj.In_(comparer, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool In<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, params TItem[] enumerable)
+        public static bool In<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, params TOther[] others)
         {
-            return obj.In_(comparison, enumerable.ThrowIfArgumentNull(nameof(enumerable)));
+            return obj.In_(areEquivalent, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool In<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<TItem> enumerable)
+        public static bool In<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<TOther> others)
         {
-            return obj.In_(comparison, enumerable.ThrowIfArgumentNull(nameof(enumerable)));
+            return obj.In_(areEquivalent, others.ThrowIfArgumentNull(nameof(others)));
         }
 
         #endregion //In
 
         #region | NotIn |
 
-        public static bool NotIn<T>(this T obj, params T[] enumerable)
+        public static bool NotIn<T>(this T obj, params T[] others)
         {
-            return obj.In_(enumerable.ThrowIfArgumentNull(nameof(enumerable))) == false;
+            return obj.In_(others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool NotIn<T>(this T obj, IEnumerable<T> enumerable)
+        public static bool NotIn<T>(this T obj, IEnumerable<T> others)
         {
-            return obj.In_(enumerable.ThrowIfArgumentNull(nameof(enumerable))) == false;
+            return obj.In_(others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool NotIn<T>(this T obj, IEqualityComparer<T> comparer, params T[] enumerable)
+        public static bool NotIn<T>(this T obj, IEqualityComparer<T> comparer, params T[] others)
         {
-            return obj.In_(comparer, enumerable.ThrowIfArgumentNull(nameof(enumerable))) == false;
+            return obj.In_(comparer, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool NotIn<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<T> enumerable)
+        public static bool NotIn<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<T> others)
         {
-            return obj.In_(comparer, enumerable.ThrowIfArgumentNull(nameof(enumerable))) == false;
+            return obj.In_(comparer, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool NotIn<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, params TItem[] enumerable)
+        public static bool NotIn<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, params TOther[] others)
         {
-            return obj.In_(comparison, enumerable.ThrowIfArgumentNull(nameof(enumerable))) == false;
+            return obj.In_(areEquivalent, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool NotIn<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<TItem> enumerable)
+        public static bool NotIn<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<TOther> others)
         {
-            return obj.In_(comparison, enumerable.ThrowIfArgumentNull(nameof(enumerable))) == false;
+            return obj.In_(areEquivalent, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
         #endregion //NotIn
 
         #region | InAny |
 
-        public static bool InAny<T>(this T obj, params IEnumerable<T>[] enumerables)
+        public static bool InAny<T>(this T obj, params IEnumerable<T>[] others)
         {
-            return obj.InAny_(enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAny_(others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAny<T>(this T obj, IEnumerable<IEnumerable<T>> enumerables)
+        public static bool InAny<T>(this T obj, IEnumerable<IEnumerable<T>> others)
         {
-            return obj.InAny_(enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAny_(others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAny<T>(this T obj, IEqualityComparer<T> comparer, params IEnumerable<T>[] enumerables)
+        public static bool InAny<T>(this T obj, IEqualityComparer<T> comparer, params IEnumerable<T>[] others)
         {
-            return obj.InAny_(comparer, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAny_(comparer, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAny<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> enumerables)
+        public static bool InAny<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> others)
         {
-            return obj.InAny_(comparer, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAny_(comparer, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAny<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, params IEnumerable<TItem>[] enumerables)
+        public static bool InAny<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, params IEnumerable<TOther>[] others)
         {
-            return obj.InAny_(comparison, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAny_(areEquivalent, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAny<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<IEnumerable<TItem>> enumerables)
+        public static bool InAny<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<IEnumerable<TOther>> others)
         {
-            return obj.InAny_(comparison, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAny_(areEquivalent, others.ThrowIfArgumentNull(nameof(others)));
         }
 
         #endregion //InAny
 
         #region | InAll |
 
-        public static bool InAll<T>(this T obj, params IEnumerable<T>[] enumerables)
+        public static bool InAll<T>(this T obj, params IEnumerable<T>[] others)
         {
-            return obj.InAll_(enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAll_(others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAll<T>(this T obj, IEnumerable<IEnumerable<T>> enumerables)
+        public static bool InAll<T>(this T obj, IEnumerable<IEnumerable<T>> others)
         {
-            return obj.InAll_(enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAll_(others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAll<T>(this T obj, IEqualityComparer<T> comparer, params IEnumerable<T>[] enumerables)
+        public static bool InAll<T>(this T obj, IEqualityComparer<T> comparer, params IEnumerable<T>[] others)
         {
-            return obj.InAll_(comparer, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAll_(comparer, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAll<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> enumerables)
+        public static bool InAll<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> others)
         {
-            return obj.InAll_(comparer, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAll_(comparer, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAll<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, params IEnumerable<TItem>[] enumerables)
+        public static bool InAll<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, params IEnumerable<TOther>[] others)
         {
-            return obj.InAll_(comparison, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAll_(areEquivalent, others.ThrowIfArgumentNull(nameof(others)));
         }
 
-        public static bool InAll<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<IEnumerable<TItem>> enumerables)
+        public static bool InAll<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<IEnumerable<TOther>> others)
         {
-            return obj.InAll_(comparison, enumerables.ThrowIfArgumentNull(nameof(enumerables)));
+            return obj.InAll_(areEquivalent, others.ThrowIfArgumentNull(nameof(others)));
         }
 
         #endregion //InAll
 
         #region | InNone |
 
-        public static bool InNone<T>(this T obj, params IEnumerable<T>[] enumerables)
+        public static bool InNone<T>(this T obj, params IEnumerable<T>[] others)
         {
-            return obj.InAny_(enumerables.ThrowIfArgumentNull(nameof(enumerables))) == false;
+            return obj.InAny_(others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool InNone<T>(this T obj, IEnumerable<IEnumerable<T>> enumerables)
+        public static bool InNone<T>(this T obj, IEnumerable<IEnumerable<T>> others)
         {
-            return obj.InAny_(enumerables.ThrowIfArgumentNull(nameof(enumerables))) == false;
+            return obj.InAny_(others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool InNone<T>(this T obj, IEqualityComparer<T> comparer, params IEnumerable<T>[] enumerables)
+        public static bool InNone<T>(this T obj, IEqualityComparer<T> comparer, params IEnumerable<T>[] others)
         {
-            return obj.InAny_(comparer, enumerables.ThrowIfArgumentNull(nameof(enumerables))) == false;
+            return obj.InAny_(comparer, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool InNone<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> enumerables)
+        public static bool InNone<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> others)
         {
-            return obj.InAny_(comparer, enumerables.ThrowIfArgumentNull(nameof(enumerables))) == false;
+            return obj.InAny_(comparer, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool InNone<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, params IEnumerable<TItem>[] enumerables)
+        public static bool InNone<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, params IEnumerable<TOther>[] others)
         {
-            return obj.InAny_(comparison, enumerables.ThrowIfArgumentNull(nameof(enumerables))) == false;
+            return obj.InAny_(areEquivalent, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
-        public static bool InNone<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<IEnumerable<TItem>> enumerables)
+        public static bool InNone<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<IEnumerable<TOther>> others)
         {
-            return obj.InAny_(comparison, enumerables.ThrowIfArgumentNull(nameof(enumerables))) == false;
+            return obj.InAny_(areEquivalent, others.ThrowIfArgumentNull(nameof(others))) == false;
         }
 
         #endregion //InNone
@@ -185,63 +185,64 @@ namespace SolutionsPG.QuickSilver.Core.Collections
 
         #region | In_ |
 
-        private static bool In_<T>(this T obj, IEnumerable<T> enumerable)
+        private static bool In_<T>(this T obj, IEnumerable<T> others)
         {
-            return enumerable.Contains(obj);
+            return others.Contains(obj);
         }
 
-        private static bool In_<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<T> enumerable)
+        private static bool In_<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<T> others)
         {
-            return enumerable.Contains(obj, comparer);
+            return others.Contains(obj, comparer);
         }
 
-        private static bool In_<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<TItem> enumerable)
+        private static bool In_<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<TOther> others)
         {
-            return enumerable.Contains(obj, comparison);
+            bool AreEquivalent(TOther s, T o) => areEquivalent(o, s);
+            return others.Contains_(obj, AreEquivalent);
         }
 
         #endregion //In_
 
         #region | InAny_ |
 
-        private static bool InAny_<T>(this T obj, IEnumerable<IEnumerable<T>> enumerable)
+        private static bool InAny_<T>(this T obj, IEnumerable<IEnumerable<T>> others)
         {
-            bool EnumerableContainsObj(IEnumerable<T> e) => obj.In(e);
-            return enumerable.Any(EnumerableContainsObj);
+            bool ObjInNested(IEnumerable<T> e) => obj.In(e);
+            return others.Any(ObjInNested);
         }
 
-        private static bool InAny_<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> enumerable)
+        private static bool InAny_<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> others)
         {
-            bool EnumerableContainsObj(IEnumerable<T> e) => obj.In(comparer, e);
-            return enumerable.Any(EnumerableContainsObj);
+            bool ObjInNested(IEnumerable<T> e) => obj.In(comparer, e);
+            return others.Any(ObjInNested);
         }
 
-        private static bool InAny_<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<IEnumerable<TItem>> enumerable)
+        private static bool InAny_<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<IEnumerable<TOther>> others)
         {
-            bool EnumerableContainsObj(IEnumerable<TItem> e) => obj.In(comparison, e);
-            return enumerable.Any(EnumerableContainsObj);
+            bool ObjInNested(IEnumerable<TOther> e) => obj.In(areEquivalent, e);
+            return others.Any(ObjInNested);
         }
 
         #endregion //InAny_
 
         #region | InAll_ |
 
-        private static bool InAll_<T>(this T obj, IEnumerable<IEnumerable<T>> enumerable)
+        private static bool InAll_<T>(this T obj, IEnumerable<IEnumerable<T>> others)
         {
-            bool EnumerableContainsObj(IEnumerable<T> e) => obj.In(e);
-            return enumerable.All(EnumerableContainsObj);
+            bool ObjInNested(IEnumerable<T> e) => obj.In(e);
+            return others.All(ObjInNested);
         }
 
-        private static bool InAll_<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> enumerable)
+        private static bool InAll_<T>(this T obj, IEqualityComparer<T> comparer, IEnumerable<IEnumerable<T>> others)
         {
-            bool EnumerableContainsObj(IEnumerable<T> e) => obj.In(comparer, e);
-            return enumerable.All(EnumerableContainsObj);
+            bool ObjInNested(IEnumerable<T> e) => obj.In(comparer, e);
+            return others.All(ObjInNested);
         }
 
-        private static bool InAll_<TObj, TItem>(this TObj obj, Func<TObj, TItem, bool> comparison, IEnumerable<IEnumerable<TItem>> enumerable)
+        private static bool InAll_<T, TOther>(this T obj, Func<T, TOther, bool> areEquivalent, IEnumerable<IEnumerable<TOther>> others)
         {
-            bool EnumerableContainsObj(IEnumerable<TItem> e) => obj.In(comparison, e);
-            return enumerable.All(EnumerableContainsObj);
+            bool ObjInNested(IEnumerable<TOther> e) => obj.In(areEquivalent, e);
+            return others.All(ObjInNested);
         }
 
         #endregion //InAll_
