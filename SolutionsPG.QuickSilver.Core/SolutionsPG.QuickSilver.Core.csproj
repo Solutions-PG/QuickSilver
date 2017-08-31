@@ -62,6 +62,16 @@
     <Compile Include="Collections\Enumerables\AsQueue..cs" />
     <Compile Include="Collections\Enumerables\Memoize.cs" />
     <Compile Include="Collections\Enumerables\TryGetElementAt.cs" />
+    <Compile Include="Composition\AsComposable.cs" />
+    <Compile Include="Composition\Apply.cs" />
+    <Compile Include="Composition\IUsing.cs" />
+    <Compile Include="Composition\IComposable.cs" />
+    <Compile Include="Composition\Using.cs" />
+    <Compile Include="Composition\Get.cs" />
+    <Compile Include="Composition\Transform.cs" />
+    <Compile Include="Composition\Do.cs" />
+    <Compile Include="Delegates\FastCreate.cs" />
+    <Compile Include="Delegates\TryCastAs.cs" />
     <Compile Include="Core\IsDefault.cs" />
     <Compile Include="Core\IsNot.cs" />
     <Compile Include="Core\Is.cs" />
