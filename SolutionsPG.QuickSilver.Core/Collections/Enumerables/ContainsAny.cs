@@ -10,89 +10,91 @@ namespace SolutionsPG.QuickSilver.Core.Collections
     {
         #region | Public methods |
 
-        public static bool ContainsAny<TItem>(this IEnumerable<TItem> enumerable, params TItem[] objToVerify)
+        public static bool ContainsAny<T>(this IEnumerable<T> source, params T[] others)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
-            objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
+            source.ThrowIfArgumentNull(nameof(source));
+            others.ThrowIfArgumentNull(nameof(others));
 
-            return enumerable.ContainsAny_(objToVerify);
+            return source.ContainsAny_(others);
         }
 
-        public static bool ContainsAny<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify)
+        public static bool ContainsAny<T>(this IEnumerable<T> source, IEnumerable<T> others)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
-            objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
+            source.ThrowIfArgumentNull(nameof(source));
+            others.ThrowIfArgumentNull(nameof(others));
 
-            return enumerable.ContainsAny_(objToVerify);
+            return source.ContainsAny_(others);
         }
 
-        public static bool ContainsAny<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, params TItem[] objToVerify)
+        public static bool ContainsAny<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer, params T[] others)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
+            source.ThrowIfArgumentNull(nameof(source));
             comparer.ThrowIfArgumentNull(nameof(comparer));
-            objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
+            others.ThrowIfArgumentNull(nameof(others));
 
-            return enumerable.ContainsAny_(comparer, objToVerify);
+            return source.ContainsAny_(comparer, others);
         }
 
-        public static bool ContainsAny<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
+        public static bool ContainsAny<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer, IEnumerable<T> others)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
-            objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
+            source.ThrowIfArgumentNull(nameof(source));
+            others.ThrowIfArgumentNull(nameof(others));
             comparer.ThrowIfArgumentNull(nameof(comparer));
 
-            return enumerable.ContainsAny_(comparer, objToVerify);
+            return source.ContainsAny_(comparer, others);
         }
 
-        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, params TObj[] objToVerify)
+        public static bool ContainsAny<TSource, TOther>(this IEnumerable<TSource> source, Func<TSource, TOther, bool> areEquivalent, params TOther[] others)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
-            comparison.ThrowIfArgumentNull(nameof(comparison));
-            objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
+            source.ThrowIfArgumentNull(nameof(source));
+            areEquivalent.ThrowIfArgumentNull(nameof(areEquivalent));
+            others.ThrowIfArgumentNull(nameof(others));
 
-            return enumerable.ContainsAny_(comparison, objToVerify);
+            return source.ContainsAny_(areEquivalent, others);
         }
 
-        public static bool ContainsAny<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
+        public static bool ContainsAny<TSource, TOther>(this IEnumerable<TSource> source, Func<TSource, TOther, bool> areEquivalent, IEnumerable<TOther> others)
         {
-            enumerable.ThrowIfArgumentNull(nameof(enumerable));
-            objToVerify.ThrowIfArgumentNull(nameof(objToVerify));
-            comparison.ThrowIfArgumentNull(nameof(comparison));
+            source.ThrowIfArgumentNull(nameof(source));
+            others.ThrowIfArgumentNull(nameof(others));
+            areEquivalent.ThrowIfArgumentNull(nameof(areEquivalent));
 
-            return enumerable.ContainsAny_(comparison, objToVerify);
+            return source.ContainsAny_(areEquivalent, others);
         }
 
         #endregion //Public methods
 
         #region | Private methods |
 
-        private static bool ContainsAny_<TItem>(this IEnumerable<TItem> enumerable, IEnumerable<TItem> objToVerify)
-        {
-            IEnumerable<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
+        private static bool ContainsAny_<T>(this IEnumerable<T> source, IEnumerable<T> others) => others.Any(CreateSourceContains(source));
 
-            bool EnumerableContainsObject(TItem o) => memoizedEnumerable.Contains(o);
-            return objToVerify.Any(EnumerableContainsObject);
+        private static bool ContainsAny_<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer, IEnumerable<T> others) => others.Any(CreateSourceContains(source, comparer));
+
+        private static bool ContainsAny_<TSource, TOther>(this IEnumerable<TSource> source, Func<TSource, TOther, bool> areEquivalent, IEnumerable<TOther> others) => others.Any(CreateSourceContains(source, areEquivalent));
+
+        private static Func<T, bool> CreateSourceContains<T>(IEnumerable<T> source) => Memoize_(source).Contains;
+
+        private static Func<T, bool> CreateSourceContains<T>(IEnumerable<T> source, IEqualityComparer<T> comparer)
+        {
+            ICollection<T> memoizedSource = Memoize_(source);
+
+            bool SourceContains(T o) => memoizedSource.Contains(o, comparer);
+            return SourceContains;
         }
 
-        private static bool ContainsAny_<TItem>(this IEnumerable<TItem> enumerable, IEqualityComparer<TItem> comparer, IEnumerable<TItem> objToVerify)
+        private static Func<TOther, bool> CreateSourceContains<TSource, TOther>(IEnumerable<TSource> source, Func<TSource, TOther, bool> areEquivalent)
         {
-            ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
+            ICollection<TSource> memoizedSource = Memoize_(source);
 
-            bool EnumerableContainsObject(TItem o) => memoizedEnumerable.Contains(o, comparer);
-            return objToVerify.Any(EnumerableContainsObject);
-        }
-
-        private static bool ContainsAny_<TItem, TObj>(this IEnumerable<TItem> enumerable, Func<TObj, TItem, bool> comparison, IEnumerable<TObj> objToVerify)
-        {
-            ICollection<TItem> memoizedEnumerable = (enumerable as ICollection<TItem>) ?? enumerable.Memoize();
-            
-            bool EnumerableContainsObject(TObj o)
+            bool SourceContains(TOther o)
             {
-                bool Compare(TItem i) => comparison(o, i);
-                return memoizedEnumerable.Any(Compare);
+                bool AreEquivalent(TSource s) => areEquivalent(s, o);
+                return memoizedSource.Any(AreEquivalent);
             }
-            return objToVerify.Any(EnumerableContainsObject);
+            return SourceContains;
         }
+
+        private static ICollection<T> Memoize_<T>(IEnumerable<T> source) => ((source as ICollection<T>) ?? source.Memoize());
 
         #endregion //Private methods
     }
