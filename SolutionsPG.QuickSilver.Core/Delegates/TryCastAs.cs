@@ -5,7 +5,7 @@ namespace SolutionsPG.QuickSilver.Core.Delegates
 {
     public static partial class DelegateExtensions
     {
-        public static bool TryCastAs<TDelegate>(this MulticastDelegate source, out TDelegate destination)
+        public static bool TryCastAs<TDelegate>(this Delegate source, out TDelegate destination)
         {
             try
             {

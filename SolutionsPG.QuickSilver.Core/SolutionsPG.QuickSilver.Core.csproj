@@ -132,6 +132,10 @@
     <Compile Include="Strings\Simplify.cs" />
     <Compile Include="Strings\AsMutable.cs" />
     <Compile Include="Strings\IsNullOr.cs" />
+    <Compile Include="System\IServiceLocationRegisterer.cs" />
+    <Compile Include="System\IServiceLocationResolver.cs" />
+    <Compile Include="System\IServiceLocator.cs" />
+    <Compile Include="System\ServiceLocator.cs" />
     <Compile Include="System\FastActivator.cs" />
   </ItemGroup>
   <ItemGroup>
