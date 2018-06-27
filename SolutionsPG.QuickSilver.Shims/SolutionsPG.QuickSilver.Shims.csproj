@@ -42,14 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\CatchGeneric.cs" />
-    <Compile Include="Exceptions\CatchWithFilter.cs" />
-    <Compile Include="Exceptions\ICatch.cs" />
     <Compile Include="NameOf.cs" />
     <Compile Include="NullConditional\NullCondtionalGeneric.cs" />
     <Compile Include="NullConditional.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Try.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
