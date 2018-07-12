@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SolutionsPG.QuickSilver.Test.Core
 {
-    public static class Act
+    public static partial class Act
     {
         public static TException GetException<TException>(Action action) where TException : Exception
         {

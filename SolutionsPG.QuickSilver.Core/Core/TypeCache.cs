@@ -4,11 +4,12 @@ namespace SolutionsPG.QuickSilver.Core
 {
     public static partial class TypeCache<T>
     {
-        #region | Public properties |
+        #region | Properties |
 
-        public static readonly Type Type = typeof(T);
-        public static readonly bool IsValueType = Type.IsValueType;
+        public static Type Type { get; } = typeof(T);
+        public static bool IsValueType => Type.IsValueType;
+        public static bool IsConcrete => Type.IsConcrete();
 
-        #endregion //Public properties
+        #endregion //Properties
     }
 }
